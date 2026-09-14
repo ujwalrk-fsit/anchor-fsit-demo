@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('anchor-theme');if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<title>Anchor — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --ink:#1B1F27; --dim:#5B6472; --faint:#8B93A3;
+  --surface:#F7F8FA; --raised:#F0F2F5;
+  --line:#E3E6EB; --line-soft:#EDEFF2;
+  --accent:#045E96; --accent-soft:#E6F1F7; --accent-ink:#034A78;
+  --beta-ink:#93610C; --beta-bg:#FFF4E3; --beta-line:#F2DDAF;
+  --dep-ink:#912018; --dep-bg:#FEF3F2; --dep-line:#FECDCA;
+  --ok:#1F8A5B; --ok-bg:#E7F4ED; --error:#B42318;
+  --mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#14171C;
+  --ink:#F3F5F7; --dim:#AEB6C2; --faint:#7A8494;
+  --surface:#1B1F27; --raised:#232833;
+  --line:#2C323D; --line-soft:#262B35;
+  --accent:#4DA8E0; --accent-soft:#0F2E42; --accent-ink:#8AC7EE;
+  --ok:#3FBE85; --ok-bg:#0F2A1E;
+  --beta-ink:#E0A63D; --beta-bg:#2E2410; --beta-line:#4A3A18;
+  --dep-ink:#F0776A; --dep-bg:#331512; --dep-line:#4F1F1B;
+  --error:#F0776A;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.hidden{display:none!important}
+.thin-scroll::-webkit-scrollbar{width:7px;height:7px}
+.thin-scroll::-webkit-scrollbar-track{background:transparent}
+.thin-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+svg{display:block}
+
+/* ---- top bar (same shell as docs) ---- */
+.topbar{height:40px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:8px;background:var(--bg);position:relative;z-index:30}
+.brand{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;color:var(--ink);text-decoration:none}
+.brand svg{width:17px;height:17px;color:var(--accent)}
+.brand b{font-size:13px;font-weight:600}
+.brand-sub{font-family:var(--mono);font-size:10px;color:var(--faint);padding-left:8px;border-left:1px solid var(--line);white-space:nowrap}
+@media(max-width:760px){.brand-sub{display:none}}
+.spacer{flex:1}
+.ver-pill{font-family:var(--mono);font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:3px 7px;display:flex;align-items:center;gap:5px;background:var(--bg);height:28px;flex-shrink:0}
+.search-pill{flex-shrink:0;display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:6px;padding:4px 8px;color:var(--faint);cursor:pointer;font-size:12px;height:28px;background:var(--bg)}
+.search-pill:hover{border-color:var(--accent);color:var(--dim)}
+.search-pill svg{width:13px;height:13px}
+kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:1px 5px;color:var(--faint);white-space:nowrap}
+.topnav{display:flex;gap:1px;flex-shrink:0}
+.topnav a{border:0;background:transparent;color:var(--dim);font-size:12px;padding:4px 8px;border-radius:6px;cursor:pointer;white-space:nowrap;font-family:var(--sans);text-decoration:none}
+.topnav a:hover{background:var(--surface);color:var(--ink)}
+.topnav a.active{background:var(--accent-soft);color:var(--accent-ink)}
+.icon-btn{display:flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--bg);color:var(--dim);font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer;font-family:var(--sans)}
+.icon-btn:hover{border-color:var(--accent);color:var(--ink)}
+.icon-btn svg{width:9px;height:9px}
+.theme-btn{height:28px;width:28px;padding:0;justify-content:center}
+.theme-btn svg{width:14px;height:14px}
+.chat-btn{height:28px;width:28px;padding:0;justify-content:center;color:var(--faint)}
+.chat-btn svg{width:13px;height:13px}
+
+/* ---- layout: left nav | content | right outline ---- */
+.layout{display:grid;grid-template-columns:196px minmax(0,1fr) 188px;height:calc(100vh - 40px)}
+.sidebar{border-right:1px solid var(--line);background:var(--surface);overflow-y:auto;padding:8px 6px;font-size:12.5px}
+.side-home{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;margin-bottom:4px;color:var(--ink);text-decoration:none}
+.side-home:hover{background:var(--raised)}
+.side-home svg{width:13px;height:13px;color:var(--accent)}
+.nav-group{margin-bottom:1px}
+.nav-sum{list-style:none;display:flex;align-items:center;gap:5px;padding:3px 6px;border-radius:5px;cursor:pointer;user-select:none;color:var(--dim)}
+.nav-sum::-webkit-details-marker{display:none}
+.nav-sum:hover{background:var(--raised);color:var(--ink)}
+.nav-sum.top{font-weight:600;font-size:11.5px}
+.nav-sum.sub{font-weight:500;font-size:12px}
+.nav-sum .caret{width:8px;height:8px;flex-shrink:0;color:var(--faint)}
+.nav-children{margin:1px 0 3px 7px;padding-left:5px;border-left:1px solid var(--line)}
+.nav-leaf{display:flex;align-items:center;gap:5px;padding:3px 6px;border-radius:5px;font-size:12px;color:var(--dim);cursor:pointer}
+.nav-leaf:hover{background:var(--raised);color:var(--ink)}
+.nav-leaf.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:500}
+.trunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.main-scroll{overflow-y:auto;display:flex;flex-direction:column;min-height:0}
+.content{width:100%;flex:1 0 auto;padding:16px 20px 28px;max-width:860px}
+.outline{border-left:1px solid var(--line);padding:14px 10px 20px 12px;overflow-y:auto;font-size:12px;background:var(--bg)}
+.outline h4{margin:0 0 6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);font-weight:600}
+.outline.empty{display:none}
+#outlineLinks a{display:block;padding:2px 0 2px 8px;border-left:2px solid transparent;color:var(--dim);text-decoration:none;font-size:12px;line-height:1.45;cursor:pointer}
+#outlineLinks a:hover{color:var(--ink)}
+#outlineLinks a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:500}
+@media(max-width:1080px){.layout{grid-template-columns:196px minmax(0,1fr)}.outline{display:none}}
+
+/* ---- content typography (same as docs) ---- */
+.crumb{font-family:var(--mono);font-size:11px;color:var(--faint);margin-bottom:6px}
+.crumb .link:hover{color:var(--accent)}
+.crumb .sep{margin:0 6px}
+.title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+.page-title{font-size:20px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.25}
+.page-desc{color:var(--dim);font-size:13px;margin:6px 0 8px;max-width:none}
+.sec{margin:14px 0;scroll-margin-top:8px}
+.sec-title{font-size:13.5px;font-weight:600;margin:0 0 6px;padding-top:2px}
+.sec h3{font-size:13px;font-weight:600;margin:12px 0 6px;color:var(--ink)}
+.sec p{margin:0 0 7px;color:var(--dim);font-size:13px}
+.sec p b,.sec li b{color:var(--ink);font-weight:600}
+.muted{color:var(--dim)}
+.link{color:var(--accent);cursor:pointer}
+.link:hover{text-decoration:underline}
+ul.bul{margin:6px 0 8px;padding-left:18px;color:var(--dim);font-size:13px}
+ul.bul li{margin:3px 0}
+ol.bul{margin:6px 0 8px;padding-left:18px;color:var(--dim);font-size:13px}
+ol.bul li{margin:3px 0}
+.in-list{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:6px;background:var(--bg)}
+.in-list .row{display:flex;align-items:center;gap:8px;padding:6px 10px;font-size:13px;color:var(--dim);cursor:pointer;border-top:1px solid var(--line-soft)}
+.in-list .row:first-child{border-top:0}
+.in-list .row:hover{background:var(--surface);color:var(--ink)}
+.in-list .row-chev{width:12px;height:12px;margin-left:auto;color:var(--faint);flex-shrink:0}
+.divider{border-top:1px solid var(--line);margin:14px 0}
+.meta-min{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin:8px 0 4px;padding:6px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.meta-min .mi{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);white-space:nowrap}
+.meta-min .mi svg{width:12px;height:12px;color:var(--faint);flex-shrink:0}
+.meta-min .mi code{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+.meta-min .ok-t{color:var(--ok);font-weight:600}
+.callout{border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:8px;padding:9px 12px;background:var(--surface);font-size:13px;color:var(--dim);margin:8px 0}
+.callout.warn{border-left-color:var(--dep-ink)}
+
+/* ---- DS spec tables ---- */
+table.spec{width:100%;border-collapse:collapse;margin:8px 0;font-size:12.5px}
+table.spec th{text-align:left;font-size:11.5px;color:var(--dim);font-weight:600;background:var(--surface);padding:6px 10px;border-bottom:1px solid var(--line)}
+table.spec td{padding:6px 10px;border-bottom:1px solid var(--line-soft);color:var(--dim);vertical-align:top}
+table.spec td:first-child{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap}
+table.spec td code{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+code.inline{font-family:var(--mono);font-size:12px;background:var(--raised);padding:2px 4px;border-radius:4px;color:var(--ink)}
+pre.code{font-family:var(--mono);font-size:12px;line-height:1.6;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;color:var(--ink);margin:8px 0}
+.pill{font-family:var(--mono);font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:4px;border:1px solid var(--line);vertical-align:-2px;margin-right:6px}
+
+/* ---- home ---- */
+.hero{max-width:none;margin-bottom:16px}
+.hero h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+.hero p{color:var(--dim);font-size:13.5px;margin:0;max-width:none}
+.search-big{margin-top:10px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;max-width:440px;color:var(--faint);font-size:13px;background:var(--surface);cursor:pointer}
+.search-big:hover{border-color:var(--accent)}
+.search-big kbd{margin-left:auto;background:var(--bg)}
+.home-sec{margin-bottom:16px}
+.home-sec h2{font-size:14px;font-weight:600;margin:0 0 8px}
+.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:900px){.home-grid{grid-template-columns:repeat(2,1fr)}}
+.home-card{border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer;background:var(--bg)}
+.home-card:hover{border-color:var(--accent)}
+.home-card svg{width:18px;height:18px;color:var(--accent);margin-bottom:6px}
+.home-card .t{font-size:13px;font-weight:600;margin-bottom:2px}
+.home-card .d{font-size:11.5px;color:var(--dim);line-height:1.45}
+
+/* ---- pager / feedback / buttons (same as docs) ---- */
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
+.pager-link{display:flex;align-items:flex-end;gap:5px;cursor:pointer;min-width:0}
+.pager-link.right{margin-left:auto;text-align:right}
+.pager-link svg{width:12px;height:12px;padding-bottom:2px;color:var(--faint);flex-shrink:0}
+.pager-link:hover svg{color:var(--accent)}
+.pager-k{font-size:10.5px;color:var(--faint);line-height:1.3}
+.pager-t{font-size:12.5px;font-weight:500;color:var(--dim);line-height:1.35}
+.pager-link:hover .pager-t{color:var(--accent-ink)}
+.icon-btn{display:flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--bg);color:var(--dim);font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer;font-family:var(--sans)}
+.icon-btn:hover{border-color:var(--accent);color:var(--ink)}
+.icon-btn svg{width:9px;height:9px}
+.fb-wrap{position:relative}
+.fb-menu{position:absolute;top:calc(100% + 5px);right:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.12);min-width:172px;padding:3px;z-index:40}
+.fb-item{padding:6px 10px;border-radius:6px;font-size:13px;cursor:pointer;color:var(--ink)}
+.fb-item:hover{background:var(--surface)}
+.panel{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:10px 12px;margin:8px 0}
+textarea.input{width:100%;min-height:58px;border:1px solid var(--line);border-radius:6px;padding:7px 9px;font-family:var(--sans);font-size:13px;color:var(--ink);resize:vertical;background:var(--bg)}
+textarea.input:focus{outline:none;border-color:var(--accent)}
+.btn{border:1px solid var(--line);background:var(--bg);color:var(--dim);font-size:12.5px;padding:5px 13px;border-radius:6px;cursor:pointer;font-family:var(--sans)}
+.btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn-primary{margin-top:8px;background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:6px;padding:5px 14px;font-size:12.5px;cursor:pointer;font-family:var(--sans)}
+.btn-primary:hover{background:var(--accent-ink)}
+.helpful-row{display:flex;align-items:center;gap:8px;margin:14px 0;font-size:13px;color:var(--dim)}
+.ok-msg{margin:14px 0;font-size:13px;color:var(--ok);display:flex;align-items:center;gap:6px}
+.fb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-start;justify-content:center;padding:6vh 12px 24px;z-index:110;overflow-y:auto}
+.fb-dialog{background:var(--bg);border-radius:12px;width:560px;max-width:94vw;box-shadow:0 24px 64px rgba(0,0,0,.25);border:1px solid var(--line);overflow:hidden;flex-shrink:0;color:var(--ink)}
+.fb-dhead{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.fb-dhead .panel-x{margin-left:auto;flex-shrink:0}
+.fb-dtitle{font-size:14px;font-weight:600}
+.fb-dsub{font-size:12px;color:var(--dim);margin-top:2px}
+.fb-dbody{padding:12px 14px;max-height:62vh;overflow-y:auto}
+.fb-field{margin-bottom:10px}
+.fb-label{font-size:12px;font-weight:600;margin-bottom:4px;display:block}
+.fb-req{color:var(--error);font-weight:600}
+.fb-hint{font-size:11.5px;color:var(--faint);margin-top:4px}
+.fb-dialog input[type="text"],.fb-dialog input[type="email"]{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-family:var(--sans);font-size:13px;color:var(--ink);background:var(--bg)}
+.fb-dialog input:focus{outline:none;border-color:var(--accent)}
+.fb-rate{display:flex;gap:6px;flex-wrap:wrap}
+.rate-pill{border:1px solid var(--line);background:var(--bg);border-radius:20px;padding:3px 10px;font-size:12px;color:var(--dim);cursor:pointer;font-family:var(--sans)}
+.rate-pill.sel{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);font-weight:500}
+.fb-file-row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim)}
+.fb-preview{border:1px solid var(--line-soft);background:var(--surface);border-radius:6px;padding:7px 9px;font-size:13px;color:var(--dim);white-space:pre-wrap;min-height:58px}
+.fb-linkbtn{background:none;border:0;color:var(--accent);font-size:12px;cursor:pointer;padding:0;font-family:var(--sans)}
+.fb-linkbtn:hover{text-decoration:underline}
+.fb-err{font-size:12px;color:var(--error);margin-bottom:8px}
+.fb-actions{display:flex;gap:8px;justify-content:flex-end;padding:10px 14px;border-top:1px solid var(--line);background:var(--surface)}
+.panel-x{color:var(--faint);cursor:pointer;font-size:16px;line-height:1}
+.panel-x:hover{color:var(--dim)}
+
+/* ---- footer (identical to docs) ---- */
+.footer{flex-shrink:0;margin-top:auto;border-top:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12px;color:var(--dim);background:var(--bg)}
+.footer a{color:var(--dim);text-decoration:none;cursor:pointer}
+.footer a:hover{color:var(--accent-ink);text-decoration:underline}
+.footer .sep{color:var(--line)}
+.footer .copy{margin-left:auto;color:var(--faint);white-space:nowrap}
+
+/* ---- cmdk (same as docs) ---- */
+.cmdk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-start;justify-content:center;padding-top:10vh;z-index:100}
+.cmdk{background:var(--bg);border-radius:12px;width:540px;max-width:90vw;box-shadow:0 24px 64px rgba(0,0,0,.25);border:1px solid var(--line);overflow:hidden}
+.cmdk-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.cmdk-head svg{width:15px;height:15px;color:var(--faint);flex-shrink:0}
+.cmdk-input{flex:1;border:0;outline:0;font-size:14px;font-family:var(--sans);background:transparent;color:var(--ink)}
+.cmdk-results{max-height:340px;overflow-y:auto;padding:5px}
+.cmdk-row{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--ink)}
+.cmdk-row:hover{background:var(--surface)}
+.cmdk-row.sel{background:var(--accent-soft);color:var(--accent-ink)}
+.cmdk-row .parents{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px;flex-shrink:0}
+.cmdk-empty{padding:22px;text-align:center;color:var(--faint);font-size:13px}
+.cmdk-foot{display:flex;align-items:center;gap:14px;padding:7px 12px;border-top:1px solid var(--line);background:var(--surface);font-size:11px;color:var(--faint)}
+.cmdk-foot kbd{background:var(--bg)}
+
+/* ---- chat dock (same as docs) ---- */
+.layout.chat-open{grid-template-columns:196px minmax(0,1fr) 188px 340px}
+@media(max-width:1080px){.layout.chat-open{grid-template-columns:196px minmax(0,1fr) 320px}}
+.chat-side{border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.chat-head{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.chat-head .panel-x{margin-left:auto;flex-shrink:0}
+.chat-title{font-size:13px;font-weight:600}
+.chat-sub{font-size:11.5px;color:var(--dim);margin-top:2px}
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.chat-msg{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--dim);max-width:85%;line-height:1.5}
+.chat-msg.me{align-self:flex-end;border-color:var(--accent);color:var(--ink)}
+.chat-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--bg)}
+.chat-input input{flex:1;border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-family:var(--sans);font-size:13px;color:var(--ink);background:var(--bg);min-width:0}
+.chat-input input:focus{outline:none;border-color:var(--accent)}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html" title="Back to Anchor home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
+    <b>Anchor</b>
+    <span class="brand-sub">Design System</span>
+  </a>
+  <span class="ver-pill">v2026.09</span>
+  <div class="spacer"></div>
+  <div class="search-pill" onclick="openCmdk()">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <span>Search…</span>
+    <kbd>Ctrl + K</kbd>
+  </div>
+  <button class="icon-btn chat-btn" onclick="toggleChat()" aria-label="Ask Anchor AI" title="Ask Anchor AI">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+  </button>
+  <nav class="topnav">
+    <a href="docs.html">Docs</a>
+    <a href="design-system.html" class="active">Design System</a>
+  </nav>
+  <button class="icon-btn theme-btn" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle theme">
+    <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="themeIconSun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+</header>
+
+<div class="layout">
+  <aside class="sidebar thin-scroll" id="sidebar"></aside>
+  <main class="main-scroll thin-scroll" id="mainScroll">
+    <div class="content" id="content"></div>
+    <footer class="footer">
+      <a>Privacy Policy</a>
+      <span class="sep">|</span>
+      <a>Terms of Use</a>
+      <span class="sep">|</span>
+      <a>Security</a>
+      <span class="copy">&copy; 2026 Fortunesoft IT Innovations</span>
+    </footer>
+  </main>
+  <aside class="outline thin-scroll" id="outlineWrap">
+    <h4>On this page</h4>
+    <div id="outlineLinks"></div>
+  </aside>
+  <aside class="chat-side hidden" id="chatSide">
+    <div class="chat-head">
+      <svg viewBox="0 0 24 24" fill="none" style="width:15px;height:15px;color:var(--accent);flex-shrink:0;margin-top:1px"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="chat-title">Anchor AI assistant</div>
+        <div class="chat-sub">Ask about tokens, components…</div>
+      </div>
+      <span class="panel-x" onclick="closeChat()">×</span>
+    </div>
+    <div class="chat-msgs thin-scroll" id="chatMsgs">
+      <div class="chat-msg">Hi — I'm the Anchor AI assistant. Ask a design-system question to get started.</div>
+    </div>
+    <div class="chat-input">
+      <input id="chatInput" type="text" placeholder="Ask Anchor AI…" onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn-primary" style="margin-top:0" onclick="sendChat()">Send</button>
+    </div>
+  </aside>
+</div>
+
+<div class="cmdk-overlay hidden" id="cmdkOverlay" onclick="if(event.target===this)closeCmdk()">
+  <div class="cmdk">
+    <div class="cmdk-head">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="cmdkInput" class="cmdk-input" placeholder="Search tokens, components, patterns…" oninput="cmdkFilter(this.value)">
+      <kbd>Esc</kbd>
+    </div>
+    <div class="cmdk-results thin-scroll" id="cmdkResults"></div>
+    <div class="cmdk-foot">
+      <span class="hint"><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+      <span class="hint"><kbd>↵</kbd> Select</span>
+      <span class="hint"><kbd>Esc</kbd> Close</span>
+    </div>
+  </div>
+</div>
+
+<div class="fb-overlay hidden" id="fbOverlay" onclick="if(event.target===this)closeFbOverlay()">
+  <div class="fb-dialog" id="fbDialog"></div>
+</div>
+
+<script>
+// ---------- SHARED PERSISTENT THEME (anchor-theme, OS default) ----------
+function syncThemeIcon(t){
+  var m=document.getElementById('themeIconMoon'),s=document.getElementById('themeIconSun');
+  if(!m||!s)return;
+  var d=t==='dark';
+  m.classList.toggle('hidden',d);
+  s.classList.toggle('hidden',!d);
+}
+function initTheme(){
+  var t=null;
+  try{t=localStorage.getItem('anchor-theme');}catch(e){}
+  if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  syncThemeIcon(t);
+}
+function toggleTheme(){
+  var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',c);
+  try{localStorage.setItem('anchor-theme',c);}catch(e){}
+  syncThemeIcon(c);
+}
+
+// ---------- DS NAV TREE (mirrors ANCHOR_DESIGN_SYSTEM.md v2) ----------
+const tree = [
+  { id:'principles', title:'Principles',
+    desc:'The eight rules every surface follows — extend the system, never fork it.',
+    body:`<section class="sec" id="sec-list"><h2 class="sec-title">The principles</h2><ol class="bul"><li><b>Centralized, not rebuilt:</b> Anchor owns who a user is and when they may act. Apps own what a user can do.</li><li><b>Production-safe defaults:</b> defaults work in sandbox; overrides are per-org and audit-logged.</li><li><b>Stability signals everywhere:</b> every page exposes area / stability / date.</li><li><b>Compact density:</b> 13px body, minimal chrome. Padding and hit-targets grow on mobile, type scale doesn't.</li><li><b>Same tokens everywhere:</b> marketing, docs, app, mobile, email reuse identical logic.</li><li><b>One system, every surface:</b> if a surface needs something uncovered, extend the system.</li><li><b>Compliance is visible:</b> sensitive actions and audit trails are always surfaced.</li><li><b>Tokens over values:</b> no raw hex/px in components — everything traces to §2–§3.</li></ol></section>` },
+  { id:'foundations', title:'Foundations',
+    desc:'Color, type, spacing, elevation, motion, iconography — the raw material.',
+    children:[
+      { id:'ds-color', title:'Color',
+        desc:'Global palette plus semantic tokens for light and dark themes.',
+        body:`<section class="sec" id="sec-global"><h2 class="sec-title">Global palette</h2><p>Raw ramps, context-free. Components never reference these directly.</p><table class="spec"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>--bg</td><td><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td>Page background (light)</td></tr><tr><td>--ink</td><td><span class="swatch" style="background:#1B1F27"></span><code>#1B1F27</code></td><td>Primary text</td></tr><tr><td>--dim</td><td><span class="swatch" style="background:#5B6472"></span><code>#5B6472</code></td><td>Secondary text</td></tr><tr><td>--faint</td><td><span class="swatch" style="background:#8B93A3"></span><code>#8B93A3</code></td><td>Tertiary, labels</td></tr><tr><td>--surface</td><td><span class="swatch" style="background:#F7F8FA"></span><code>#F7F8FA</code></td><td>Sidebar, panels</td></tr><tr><td>--raised</td><td><span class="swatch" style="background:#F0F2F5"></span><code>#F0F2F5</code></td><td>Hover wash</td></tr><tr><td>--line</td><td><span class="swatch" style="background:#E3E6EB"></span><code>#E3E6EB</code></td><td>Borders</td></tr><tr><td>--accent</td><td><span class="swatch" style="background:#045E96"></span><code>#045E96</code></td><td>Primary action</td></tr><tr><td>--accent-soft</td><td><span class="swatch" style="background:#E6F1F7"></span><code>#E6F1F7</code></td><td>Active bg</td></tr><tr><td>--accent-ink</td><td><span class="swatch" style="background:#034A78"></span><code>#034A78</code></td><td>Text on accent-soft</td></tr><tr><td>--ok / --ok-bg</td><td><code>#1F8A5B / #E7F4ED</code></td><td>Success</td></tr><tr><td>--beta-*</td><td><code>#93610C / #FFF4E3 / #F2DDAF</code></td><td>Warning / Beta</td></tr><tr><td>--dep-*</td><td><code>#912018 / #FEF3F2 / #FECDCA</code></td><td>Danger / Deprecated</td></tr><tr><td>--error</td><td><code>#B42318</code></td><td>Form validation only</td></tr></table></section><section class="sec" id="sec-dark"><h2 class="sec-title">Dark theme</h2><p>Same names via <code class="inline">[data-theme="dark"]</code> — toggle in the topbar to preview. Exactly five status meanings (neutral, info, success, warning, danger). No sixth.</p></section>` },
+      { id:'ds-type', title:'Typography',
+        desc:'DM Sans for UI and prose, DM Mono for code, versions, and comparable numbers.',
+        body:`<section class="sec" id="sec-scale"><h2 class="sec-title">Scale</h2><table class="spec"><tr><th>Element</th><th>Spec</th><th>Usage</th></tr><tr><td>Body</td><td><code>13px / 1.5 sans</code></td><td>Global default</td></tr><tr><td>Hero h1</td><td><code>24px / 600</code></td><td>Landing hero</td></tr><tr><td>Page title</td><td><code>20px / 600</code></td><td>Article / app header</td></tr><tr><td>Section h2</td><td><code>14px home, 13.5px article</code></td><td>Sections</td></tr><tr><td>Mono label</td><td><code>10–12px mono faint</code></td><td>Labels, kbd</td></tr><tr><td>Mobile title</td><td><code>15px / 600</code></td><td>Native bar only</td></tr></table></section><section class="sec" id="sec-rules"><h2 class="sec-title">Rules</h2><ul class="bul"><li>Headings <code class="inline">600</code> only. Links <code class="inline">accent</code>, underline on hover.</li><li>DM Mono caps at <code class="inline">500</code> — never request 600/700 in mono.</li><li>Body size never changes across breakpoints or surfaces.</li></ul></section>` },
+      { id:'ds-spacing', title:'Spacing & Grid',
+        desc:'4px base unit and the responsive 12 / 8 / 4 column grid.',
+        body:`<section class="sec" id="sec-scale"><h2 class="sec-title">Scale &amp; grid</h2><p>Scale: <code class="inline">4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64</code>.</p><table class="spec"><tr><th>Breakpoint</th><th>Columns</th><th>Gutter</th><th>Margin</th></tr><tr><td>≥1080px</td><td><code>12</code></td><td><code>24px</code></td><td><code>20px</code></td></tr><tr><td>760–1079px</td><td><code>8</code></td><td><code>20px</code></td><td><code>16px</code></td></tr><tr><td>&lt;760px</td><td><code>4</code></td><td><code>16px</code></td><td><code>16px</code></td></tr></table></section>` },
+      { id:'ds-radius', title:'Radius & Border',
+        desc:'One radius ramp from pills to dialogs, plus border rules.',
+        body:`<section class="sec" id="sec-radius"><h2 class="sec-title">Radius &amp; border</h2><p><code class="inline">4px</code> pills/kbd → <code class="inline">6px</code> buttons/inputs → <code class="inline">8px</code> cards/lists → <code class="inline">10px</code> windows → <code class="inline">12px</code> dialogs/sheets. <code class="inline">20px</code> rating pills, <code class="inline">999px</code> toggles/avatars. Borders <code class="inline">1px line</code>, inner <code class="inline">1px line-soft</code>, callout adds <code class="inline">2px left accent</code>.</p></section>` },
+      { id:'ds-elevation', title:'Elevation & Shadow',
+        desc:'Four shadows, one scrim, and the z-index ladder.',
+        body:`<section class="sec" id="sec-shadow"><h2 class="sec-title">Elevation</h2><table class="spec"><tr><th>Token</th><th>Value</th><th>Used by</th></tr><tr><td>--shadow-card</td><td><code>0 12px 32px rgba(16,24,40,.08)</code></td><td>Cards</td></tr><tr><td>--shadow-menu</td><td><code>0 8px 24px rgba(16,24,40,.12)</code></td><td>Menus, toasts</td></tr><tr><td>--shadow-overlay</td><td><code>0 24px 64px rgba(0,0,0,.25)</code></td><td>Overlays</td></tr><tr><td>--scrim</td><td><code>rgba(0,0,0,.35)</code></td><td>Backdrop</td></tr></table><p>z-index: content <code class="inline">0</code> → sticky <code class="inline">30</code> → menus <code class="inline">40</code> → panels <code class="inline">45</code> → toasts <code class="inline">50</code> → scrim <code class="inline">59</code> → dialogs <code class="inline">60</code>.</p></section>` },
+      { id:'ds-motion', title:'Motion',
+        desc:'Three durations, three easings, and reduced-motion rules.',
+        body:`<section class="sec" id="sec-dur"><h2 class="sec-title">Durations</h2><table class="spec"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>--dur-fast</td><td><code>100ms</code></td><td>Hover, focus, tabs</td></tr><tr><td>--dur-base</td><td><code>160ms</code></td><td>Menu, accordion, toast</td></tr><tr><td>--dur-slow</td><td><code>240ms</code></td><td>Dialog, sheet</td></tr></table><p>Skeleton shimmer <code class="inline">1.4s</code>, spinners <code class="inline">800ms linear infinite</code>. Respect <code class="inline">prefers-reduced-motion</code>.</p></section>` },
+      { id:'ds-icon', title:'Iconography',
+        desc:'Lucide only, plus the shield brand mark in accent.',
+        body:`<section class="sec" id="sec-icons"><h2 class="sec-title">Icons &amp; brand</h2><p><b>Lucide only</b> — <code class="inline">stroke=currentColor, fill=none, strokeWidth 2</code>. Brand mark: the shield below in <code class="inline">--accent</code> via <code class="inline">currentColor</code>, shared by landing, docs, and this page.</p><pre class="code">&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"&gt;\n  &lt;path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/&gt;\n  &lt;circle cx="12" cy="11" r="2.4"/&gt;\n  &lt;path d="M12 13.4V16.5" stroke-linecap="round"/&gt;\n&lt;/svg&gt;</pre></section>` },
+      { id:'ds-illustration', title:'Illustration & Imagery',
+        desc:'Icon-led states today; monochrome rules if illustration is ever needed.',
+        body:`<section class="sec" id="sec-illus"><h2 class="sec-title">Illustration</h2><p>Icon-led empty/error states, no custom illustration yet. If needed: monochrome or two-tone (<code class="inline">--accent</code> + neutrals), flat, no gradients — and flag it as a gap.</p></section>` },
+      { id:'ds-breakpoints', title:'Breakpoints',
+        desc:'What collapses, when, on every shell.',
+        body:`<section class="sec" id="sec-bp"><h2 class="sec-title">Breakpoints</h2><table class="spec"><tr><th>Width</th><th>Behavior</th></tr><tr><td>1080px</td><td><code>Drop outline; chat/right rail hides</code></td></tr><tr><td>900px</td><td><code>home-grid 3→2; footer 5→2</code></td></tr><tr><td>860px</td><td><code>hero/two-col 2→1</code></td></tr><tr><td>760px</td><td><code>Hide brand-sub; sidebar → 72px icon-only</code></td></tr><tr><td>560px</td><td><code>Single col; dialogs → sheets; sidebar → tab bar</code></td></tr></table></section>` },
+    ]},
+  { id:'tokens-arch', title:'Tokens Architecture',
+    desc:'Three tiers — global, semantic, component — and the rules for adding tokens.',
+    body:`<section class="sec" id="sec-tiers"><h2 class="sec-title">Tiers</h2><table class="spec"><tr><th>Tier</th><th>Example</th><th>Rule</th></tr><tr><td>1 — Global</td><td><code>Accent-50 #045E96</code></td><td>Raw values, never referenced by components</td></tr><tr><td>2 — Semantic</td><td><code>--accent, --surface</code></td><td>Theme-swappable; what components use</td></tr><tr><td>3 — Component</td><td><code>--button-primary-bg</code></td><td>Aliases Tier-2; --{component}-{variant}-{property}</td></tr></table><p>New token flow: Tier-1 value → Tier-2 role → Tier-3 alias. Skipping a tier is not allowed.</p></section>` },
+  { id:'shells', title:'Layout Shells',
+    desc:'Landing, docs, app, mobile, and email shells share tokens and differ only in chrome.',
+    children:[
+      { id:'ds-shell-landing', title:'Landing Shell', desc:'1080px marketing shell with hero, mock console, and pillar grid.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p><code class="inline">lp-top 40px</code> sticky, <code class="inline">lp-hero-grid 1fr 1.05fr</code>, <code class="inline">lp-two 1fr 1fr</code>, footer <code class="inline">1.5fr 1fr 1fr 1fr 1fr</code>. Max width <code class="inline">1080px</code>.</p></section>` },
+      { id:'ds-shell-docs', title:'Docs Shell', desc:'196px sidebar, fluid article, 188px outline — the shell this page uses.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Grid <code class="inline">196px minmax(0,1fr) 188px, height calc(100vh - 40px)</code>. Article <code class="inline">16px 20px 28px</code>, footer via <code class="inline">margin-top:auto</code>.</p></section>` },
+      { id:'ds-shell-app', title:'SaaS App Shell', desc:'Collapsible sidebar, 48px topbar, widget grid for dashboards.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Sidebar <code class="inline">72px / 220px</code>, rows <code class="inline">36px</code>, active = <code class="inline">accent-soft + 3px accent bar</code>. Topbar <code class="inline">48px</code>. Content <code class="inline">24px (16 tablet, 12 mobile)</code>. Widget grid <code class="inline">4→2→1</code>.</p></section>` },
+      { id:'ds-shell-mobile', title:'Mobile Shell', desc:'Tab bar, 44px targets, sheets instead of dialogs.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Touch targets <code class="inline">44×44px</code> min + safe-area insets. Tab bar <code class="inline">56px, 4–5 items</code>. Buttons <code class="inline">10px 16px</code>, inputs <code class="inline">44px min-height</code>. Type stays <code class="inline">13px</code>.</p></section>` },
+      { id:'ds-shell-email', title:'Email Templates', desc:'600px table-based templates with inlined hex — the one untokenized surface.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p><code class="inline">600px max, single column</code>. Body <code class="inline">14px/1.6</code>. Bulletproof button <code class="inline">accent bg, 12px 24px</code>. No webfont/SVG/animation reliance.</p></section>` },
+    ]},
+  { id:'components', title:'Components',
+    desc:'Every reusable piece, from buttons to toasts, with specs.',
+    children:[
+      { id:'ds-comp-actions', title:'Actions', desc:'Buttons, links, and toolbars — primary is accent, danger is error.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><table class="spec"><tr><th>Variant</th><th>Spec</th><th>Use for</th></tr><tr><td>.btn</td><td><code>12.5px, line border, 6px radius</code></td><td>Secondary, Close</td></tr><tr><td>.btn-primary</td><td><code>accent bg, white text</code></td><td>Primary CTA</td></tr><tr><td>.btn-danger</td><td><code>--error bg</code></td><td>Destructive confirm</td></tr><tr><td>Link</td><td><code>accent, underline on hover</code></td><td>Navigation</td></tr><tr><td>Toolbar</td><td><code>36px, surface</code></td><td>Bulk actions</td></tr></table></section>` },
+      { id:'ds-comp-forms', title:'Forms & Inputs', desc:'36px fields, accent focus ring, blur validation, visible labels.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Input <code class="inline">36px / 44px mobile, 6px radius</code>. Focus <code class="inline">1px accent + 3px accent-soft ring</code>. Required = <code class="inline">accent-ink *</code> (never red). Error = <code class="inline">--error border + icon + text</code>. Validate on blur; placeholders never replace labels.</p></section>` },
+      { id:'ds-comp-selection', title:'Selection & Filtering', desc:'Tabs, segmented switchers, multiselects, and filter pills.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Tabs <code class="inline">36px, active = 2px accent underline</code>. Switcher = segmented <code class="inline">6px radius</code>. Filter pills with <code class="inline">x</code> + Clear-all link once ≥1 active.</p></section>` },
+      { id:'ds-comp-nav', title:'Navigation', desc:'Sidebars, pills, breadcrumbs, pagination, and menus.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Sidebar leaf <code class="inline">12px dim</code>, active <code class="inline">accent-soft + accent-ink</code>. Breadcrumbs mono <code class="inline">11px faint</code>. Pagination <code class="inline">28px squares</code>. Menus <code class="inline">168px+, 8px radius</code>, destructive items in <code class="inline">--error</code>.</p></section>` },
+      { id:'ds-comp-labels', title:'Labels & Identity', desc:'Kickers, status chips, badges, and avatars.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Status chip always paired: chip + nav suffix + meta strip. Badge <code class="inline">10.5px mono, five colors only</code>. Avatar <code class="inline">24/32/40px</code>, initials fallback on <code class="inline">accent-soft</code>.</p></section>` },
+      { id:'ds-comp-structure', title:'Content & Structure', desc:'Callouts, lists, cards, accordions, and dividers.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Callout <code class="inline">surface, 8px radius, 2px left accent</code>. In-list rows <code class="inline">6px 10px, chevron right</code>. Pillar card hover: <code class="inline">accent border</code> only.</p></section>` },
+      { id:'ds-comp-data', title:'Data Display', desc:'Tables, stat grids, and code panels.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Table rows <code class="inline">40px / 48px comfortable</code>, selected <code class="inline">accent-soft + 2px bar</code>. Numeric columns right-align mono. Inline code <code class="inline">mono on raised</code> vs full code panel.</p></section>` },
+      { id:'ds-comp-overlays', title:'Overlays', desc:'Modals, drawers, popovers, tooltips, CmdK, toasts, and onboarding.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Modal <code class="inline">540–560px, 12px radius</code>. Confirm <code class="inline">420px</code>, names exactly what's affected. Drawer <code class="inline">360–480px</code>. Tooltip: no interactive content (toggletip variant opens on click). Toast <code class="inline">360px max, 5s, cap 3</code>.</p></section>` },
+      { id:'ds-comp-feedback', title:'Feedback & Loading', desc:'Skeletons for content, spinners for actions, banners for system state.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Skeleton for lists/tables/cards; spinner <code class="inline">16px accent</code> for buttons/first paint. Progress bar <code class="inline">4px accent fill</code>. Empty state: <code class="inline">32px icon, 13px/600 title, 320px desc</code>.</p></section>` },
+      { id:'ds-comp-roadmap', title:'Roadmap & Releases', desc:'Phase cards and release entries with mono version labels.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p>Phase card <code class="inline">8px radius, 10px 12px</code>. Release: <code class="inline">2px left line, 8px accent dot</code>, version mono <code class="inline">13px/500</code>.</p></section>` },
+      { id:'ds-comp-footer', title:'Footer', desc:'In-column legal strip, identical on docs and this page.', body:`<section class="sec" id="sec-spec"><h2 class="sec-title">Spec</h2><p><code class="inline">12px dim, 12px 20px, top line border</code>. Landing adds the 5-column grid above the same legal strip.</p></section>` },
+    ]},
+  { id:'patterns', title:'Patterns',
+    desc:'Task-level guidance spanning multiple components.',
+    body:`<section class="sec" id="sec-list"><h2 class="sec-title">Patterns</h2><ul class="bul"><li><b>Global header:</b> brand + nav + entry point, sticky everywhere.</li><li><b>Forms:</b> section labels, blur validation, steps beyond ~6 fields.</li><li><b>Filtering:</b> removable pills above content, no reload.</li><li><b>Search:</b> CmdK globally; plain input for scoped search.</li><li><b>Login:</b> hosted + SDK; WebAuthn new, SMS deprecated.</li><li><b>Empty states:</b> every list ships one.</li><li><b>Loading:</b> skeleton for content, spinner for actions.</li><li><b>Notifications:</b> toast ephemeral, banner persistent, inline section-scoped.</li><li><b>Destructive:</b> always confirm. <b>Overflow:</b> truncate + tooltip.</li><li><b>Sensitive data:</b> <code class="inline">faint mono Sensitive tag</code>, masked by default.</li></ul></section>` },
+  { id:'dataviz', title:'Data Visualization',
+    desc:'Proposed categorical palette — confirm with brand before shipping charts.',
+    body:`<section class="sec" id="sec-palette"><h2 class="sec-title">Categorical palette</h2><table class="spec"><tr><th>Series</th><th>Hex</th><th>Role</th></tr><tr><td>1</td><td><span class="swatch" style="background:#045E96"></span><code>#045E96</code></td><td>Primary (accent)</td></tr><tr><td>2</td><td><span class="swatch" style="background:#0E7C86"></span><code>#0E7C86</code></td><td>Teal</td></tr><tr><td>3</td><td><span class="swatch" style="background:#5B4B8A"></span><code>#5B4B8A</code></td><td>Violet</td></tr><tr><td>4</td><td><span class="swatch" style="background:#B76E00"></span><code>#B76E00</code></td><td>Amber</td></tr><tr><td>5</td><td><span class="swatch" style="background:#2F855A"></span><code>#2F855A</code></td><td>Green</td></tr><tr><td>6</td><td><span class="swatch" style="background:#B23A5C"></span><code>#B23A5C</code></td><td>Rose</td></tr><tr><td>7</td><td><span class="swatch" style="background:#556070"></span><code>#556070</code></td><td>Slate</td></tr><tr><td>8</td><td><span class="swatch" style="background:#C1502E"></span><code>#C1502E</code></td><td>Coral</td></tr></table><p>Bar for comparisons, line for trends. Axes <code class="inline">11px mono faint</code>, values on hover only. Never color alone.</p></section>` },
+  { id:'content-voice', title:'Content & Voice',
+    desc:'Direct, calm, specific — verbs on buttons, cause plus next step on errors.',
+    body:`<section class="sec" id="sec-voice"><h2 class="sec-title">Voice</h2><ul class="bul"><li>No <code class="inline">!</code> in system copy. Buttons are verbs: <b>Save changes, Revoke access.</b></li><li>Errors state cause + next step, never blame.</li><li>Timestamps absolute mono first: <code class="inline">2026-08-14 14:02 UTC</code>.</li><li>Comparable numbers in mono tabular figures.</li></ul></section>` },
+  { id:'a11y', title:'Accessibility & Compliance',
+    desc:'WCAG 2.1 AA everywhere — contrast, focus, keyboard, and audit-visible actions.',
+    body:`<section class="sec" id="sec-reqs"><h2 class="sec-title">Requirements</h2><ul class="bul"><li>AA contrast. <code class="inline">--faint</code> for labels only, never body copy.</li><li>Focus ring <code class="inline">2px accent-soft, 1px offset</code> on everything interactive.</li><li>Never color alone. Labels visible; errors via <code class="inline">aria-live polite</code>.</li><li>Destructive actions always confirm. Target: WCAG 2.1 AA on all surfaces.</li></ul></section><section class="sec" id="sec-keys"><h2 class="sec-title">Keyboard</h2><table class="spec"><tr><th>Shortcut</th><th>Action</th></tr><tr><td>Ctrl/⌘+K</td><td><code>Open/close search</code></td></tr><tr><td>↑ / ↓</td><td><code>Navigate rows</code></td></tr><tr><td>Enter</td><td><code>Select</code></td></tr><tr><td>Esc</td><td><code>Close topmost overlay</code></td></tr></table></section>` },
+  { id:'theming', title:'Theming',
+    desc:'One attribute swap drives light and dark across all three pages.',
+    body:`<section class="sec" id="sec-how"><h2 class="sec-title">How it works</h2><p>Mechanism: <code class="inline">[data-theme="dark"]</code> on <code class="inline">&lt;html&gt;</code>, key <code class="inline">anchor-theme</code>, OS default, blocking head script (no flash). Tier-2 tokens swap; components referencing Tier-2/3 need no overrides. Test every component in both themes. Multi-brand is out of scope — fork at Tier-1→Tier-2 if ever needed.</p></section>` },
+  { id:'dos-donts', title:"Do's and Don'ts",
+    desc:'The short list that keeps every surface consistent.',
+    body:`<section class="sec" id="sec-do"><h2 class="sec-title">Do</h2><ul class="bul"><li>Reuse tokens verbatim. DM Sans UI, DM Mono code (cap 500).</li><li>Shield in accent as sole brand mark; Lucide for all icons.</li><li>Beta/Deprecated in three places: chip + suffix + meta strip.</li><li>Skeletons for loads; 44×44px touch minimum; confirm destructive actions.</li><li>Check every component in light + dark.</li></ul></section><section class="sec" id="sec-dont"><h2 class="sec-title">Don't</h2><ul class="bul"><li>No new accents, no 700 headings, no gradients.</li><li>Don't hide version/date/stability. No SMS for new flows.</li><li>No custom auth UI; no polling when webhooks exist.</li><li>No color-alone status, placeholder-as-label, or silent bulk actions.</li><li>Max 3 toasts; 5 mobile tabs; no sixth badge color; no hardcode where a token exists.</li></ul></section>` },
+];
+
+// ---- flatten (pre-order) ----
+const byId = {};
+const flatOrder = [];
+(function flatten(nodes, parents){
+  nodes.forEach(n=>{
+    byId[n.id] = Object.assign({}, n, {parents:parents});
+    flatOrder.push(n.id);
+    if(n.children) flatten(n.children, parents.concat([n.title]));
+  });
+})(tree, []);
+
+const sidebarEl = document.getElementById('sidebar');
+const contentEl = document.getElementById('content');
+const mainScroll = document.getElementById('mainScroll');
+const outlineWrap = document.getElementById('outlineWrap');
+const outlineLinks = document.getElementById('outlineLinks');
+let feedbackState = {};
+
+const ROW_CHEV = '<svg class="row-chev" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ROW_CHEV_L = '<svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function renderNode(node, depth){
+  if(node.children){
+    const isTop = depth === 0;
+    return `<details class="nav-group" open>
+      <summary class="nav-sum ${isTop?'top':'sub'}" onclick="event.stopPropagation();selectPage('${node.children[0].id}')">
+        <svg class="caret" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span class="trunc">${node.title}</span>
+      </summary>
+      <div class="nav-children">${node.children.map(c=>renderNode(c, depth+1)).join('')}</div>
+    </details>`;
+  }
+  return `<div class="nav-leaf" data-id="${node.id}" onclick="selectPage('${node.id}')">
+    <span class="trunc">${node.title}</span>
+  </div>`;
+}
+sidebarEl.innerHTML = `
+  <div class="side-home" onclick="goHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+    <span>Home</span>
+  </div>
+  ${tree.map(n=>renderNode(n,0)).join('')}
+`;
+
+// ---------- OUTLINE + SCROLL SPY ----------
+function buildOutline(sections){
+  if(!sections || !sections.length){ outlineWrap.classList.add('empty'); outlineLinks.innerHTML=''; return; }
+  outlineWrap.classList.remove('empty');
+  outlineLinks.innerHTML = sections.map(s=>`<a data-target="${s.id}">${s.label}</a>`).join('');
+  outlineLinks.querySelectorAll('a').forEach(a=>{
+    a.onclick = (e)=>{
+      e.preventDefault();
+      const el = document.getElementById(a.dataset.target);
+      if(el) mainScroll.scrollTo({top: el.offsetTop - 10, behavior:'smooth'});
+    };
+  });
+  requestAnimationFrame(updateSpy);
+}
+function updateSpy(){
+  const secs = Array.prototype.slice.call(contentEl.querySelectorAll('section[id]'));
+  if(!secs.length) return;
+  const top = mainScroll.scrollTop + 24;
+  let cur = secs[0].id;
+  for(const s of secs){ if(s.offsetTop <= top) cur = s.id; }
+  outlineLinks.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.dataset.target===cur));
+}
+mainScroll.addEventListener('scroll', ()=>requestAnimationFrame(updateSpy), {passive:true});
+function resetScroll(){ mainScroll.scrollTop = 0; }
+
+// ---------- FEEDBACK DROPDOWN (same as docs) ----------
+function feedbackDropdown(pageId){
+  const menuOpen = feedbackState[pageId+'-menu'];
+  return `
+    <div class="fb-wrap">
+      <button class="icon-btn" onclick="toggleFbMenu('${pageId}')">
+        Feedback
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="fb-menu ${menuOpen?'':'hidden'}" id="fbmenu-${pageId}">
+        <div class="fb-item" onclick="chooseFeedback('${pageId}','issue')">Report an issue</div>
+        <div class="fb-item" onclick="chooseFeedback('${pageId}','feature')">Suggest a feature</div>
+      </div>
+    </div>`;
+}
+function toggleFbMenu(pageId){ feedbackState[pageId+'-menu'] = !feedbackState[pageId+'-menu']; rerender(pageId); }
+let fbCurrent = null;
+let currentPage = null;
+function chooseFeedback(pageId, mode){ feedbackState[pageId+'-menu']=false; rerender(pageId); openFbOverlay(pageId, mode); }
+function openFbOverlay(pageId, mode){
+  const node = byId[pageId];
+  fbCurrent = { pageId, mode };
+  const isIssue = mode !== 'feature';
+  const ratings = ['none','not useful','needs work','good','great','awesome'];
+  document.getElementById('fbDialog').innerHTML = `
+    <div class="fb-dhead">
+      <div>
+        <div class="fb-dtitle">${isIssue ? 'Report an issue' : 'Suggest a feature'} — ${node ? node.title : ''}</div>
+        <div class="fb-dsub">Provide feedback about this article. If you need help, visit Anchor Support in <a class="link" href="docs.html">the docs</a>.</div>
+      </div>
+      <span class="panel-x" onclick="closeFbOverlay()">×</span>
+    </div>
+    <div class="fb-dbody">
+      <div class="fb-err hidden" id="fb-err"></div>
+      ${isIssue ? `<div class="fb-field">
+        <span class="fb-label">Rating</span>
+        <div class="fb-rate" id="fb-rate">${ratings.map(r=>`<button class="rate-pill ${r==='none'?'sel':''}" data-r="${r}" onclick="fbSetRating('${r}')">${r.charAt(0).toUpperCase()+r.slice(1)}</button>`).join('')}</div>
+      </div>` : ''}
+      <div class="fb-field">
+        <label class="fb-label" for="fb-summary">Summary <span class="fb-req">*</span></label>
+        <input type="text" id="fb-summary" placeholder="${isIssue ? 'Brief summary of the problem' : 'Brief summary of your suggestion'}">
+      </div>
+      <div class="fb-field">
+        <span class="fb-label">Description</span>
+        <div style="margin-bottom:4px"><button class="fb-linkbtn" onclick="fbTogglePreview()">Preview description</button></div>
+        <textarea id="fb-desc" class="input" placeholder="${isIssue ? 'What went wrong, and what did you expect instead?' : 'What would you like this to do?'}"></textarea>
+        <div id="fb-preview" class="fb-preview hidden"></div>
+      </div>
+      <div class="fb-field">
+        <span class="fb-label">Does this page contain sensitive information? <span class="fb-req">*</span></span>
+        <div style="display:flex;gap:8px" id="fb-sens"><button class="btn" data-v="yes" onclick="fbSetSensitive('yes')">Yes</button><button class="btn" data-v="no" onclick="fbSetSensitive('no')">No</button></div>
+      </div>
+    </div>
+    <div class="fb-actions">
+      <button class="btn" onclick="closeFbOverlay()">Close</button>
+      <button class="btn-primary" style="margin-top:0" onclick="submitFbOverlay()">${isIssue ? 'Log issue' : 'Submit suggestion'}</button>
+    </div>`;
+  document.getElementById('fbOverlay').classList.remove('hidden');
+}
+function closeFbOverlay(){ document.getElementById('fbOverlay').classList.add('hidden'); fbCurrent = null; }
+function fbSetRating(r){
+  if(!fbCurrent) return;
+  fbCurrent.rating = r;
+  document.querySelectorAll('#fb-rate .rate-pill').forEach(b=>b.classList.toggle('sel', b.dataset.r===r));
+}
+function fbSetSensitive(v){
+  if(!fbCurrent) return;
+  fbCurrent.sensitive = v;
+  document.querySelectorAll('#fb-sens .btn').forEach(b=>{
+    const on = b.dataset.v===v;
+    b.style.borderColor = on ? 'var(--accent)' : '';
+    b.style.color = on ? 'var(--accent-ink)' : '';
+  });
+}
+function fbTogglePreview(){
+  if(!fbCurrent) return;
+  fbCurrent.preview = !fbCurrent.preview;
+  const ta = document.getElementById('fb-desc'), pv = document.getElementById('fb-preview');
+  pv.textContent = ta.value || 'Nothing to preview yet.';
+  ta.classList.toggle('hidden', fbCurrent.preview);
+  pv.classList.toggle('hidden', !fbCurrent.preview);
+}
+function submitFbOverlay(){
+  if(!fbCurrent) return;
+  const err = document.getElementById('fb-err');
+  const summary = document.getElementById('fb-summary').value.trim();
+  if(!summary){ err.textContent = 'Summary is required.'; err.classList.remove('hidden'); return; }
+  if(!fbCurrent.sensitive){ err.textContent = 'Please tell us whether this page contains sensitive information.'; err.classList.remove('hidden'); return; }
+  err.classList.add('hidden');
+  const done = fbCurrent;
+  document.getElementById('fbDialog').innerHTML = `
+    <div class="fb-dhead"><div class="fb-dtitle">${done.mode!=='feature' ? 'Report an issue' : 'Suggest a feature'}</div></div>
+    <div class="fb-dbody"><div class="ok-msg" style="margin:0">✓ Thanks — logged for the platform team and tagged to &ldquo;${byId[done.pageId].title}&rdquo;.</div></div>
+    <div class="fb-actions"><button class="btn" onclick="closeFbOverlay()">Close</button></div>`;
+}
+
+// ---------- HELPFUL WIDGET (same as docs) ----------
+function markHelpful(pageId, val){ feedbackState[pageId+'-helpful']=val; rerender(pageId); }
+function submitHelpfulReason(pageId){ feedbackState[pageId+'-helpful-submitted']=true; rerender(pageId); }
+function helpfulWidget(pageId){
+  const answer = feedbackState[pageId+'-helpful'];
+  const submitted = feedbackState[pageId+'-helpful-submitted'];
+  if(answer === 'yes') return `<div class="ok-msg">✓ Thanks for the feedback.</div>`;
+  if(answer === 'no'){
+    if(submitted) return `<div class="ok-msg">✓ Thanks — we've logged this to improve the page.</div>`;
+    return `
+      <section class="sec" id="sec-feedback">
+        <div class="panel">
+          <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px">Sorry to hear that — what was missing or unclear?</div>
+          <textarea id="hf-${pageId}" class="input" placeholder="Tell us what could be improved…"></textarea>
+          <button class="btn-primary" onclick="submitHelpfulReason('${pageId}')">Submit feedback</button>
+        </div>
+      </section>`;
+  }
+  return `<div class="helpful-row">
+    <span>Was this page helpful?</span>
+    <button class="btn" onclick="markHelpful('${pageId}','yes')">Yes</button>
+    <button class="btn" onclick="markHelpful('${pageId}','no')">No</button>
+  </div>`;
+}
+
+// ---------- META STRIP ----------
+function metaboxes(node){
+  return `
+  <div class="meta-min">
+    <span class="mi">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2h8l5 5v15H6V2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 2v5h5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 13h7M9 17h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      ${node.parents[0] || node.title}
+    </span>
+    <span class="mi">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="ok-t">Stable</span>
+    </span>
+    <span class="mi">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <code>2026-09-13</code>
+    </span>
+  </div>`;
+}
+
+function pagerRow(pageId){
+  const leaves = flatOrder.filter(id=>!byId[id].children);
+  const i = leaves.indexOf(pageId);
+  const prevId = i>0 ? leaves[i-1] : null;
+  const nextId = i<leaves.length-1 ? leaves[i+1] : null;
+  if(i===-1) return '';
+  return `<div class="pager">
+    ${prevId ? `<div class="pager-link" onclick="selectPage('${prevId}')">${ROW_CHEV_L}<div><div class="pager-k">Previous</div><div class="pager-t">${byId[prevId].title}</div></div></div>` : '<div></div>'}
+    ${nextId ? `<div class="pager-link right" onclick="selectPage('${nextId}')"><div><div class="pager-k">Next</div><div class="pager-t">${byId[nextId].title}</div></div>${ROW_CHEV}</div>` : '<div></div>'}
+  </div>`;
+}
+
+function selectPage(id){ setActiveLeaf(id); render(id); }
+function setActiveLeaf(id){
+  document.querySelectorAll('.nav-leaf').forEach(el=>el.classList.toggle('active', el.dataset.id===id));
+}
+function findFirstLeaf(node){ return node.children ? findFirstLeaf(node.children[0]) : node.id; }
+function getSiblings(node){
+  const key = node.parents.join('|');
+  return flatOrder.filter(id=>id!==node.id && byId[id].parents.join('|')===key);
+}
+function rerender(id){ if(currentPage) render(currentPage); }
+
+function outlineForBody(body){
+  const secs = [{id:'sec-overview', label:'Overview'}];
+  const re = /<section class="sec" id="([^"]+)"><h2 class="sec-title">([^<]+)<\/h2>/g;
+  let m;
+  while((m = re.exec(body))){ if(m[1] !== 'sec-overview') secs.push({id:m[1], label:m[2]}); }
+  return secs;
+}
+
+function bodyForNode(node){
+  let h = `<section class="sec" id="sec-overview"><h2 class="sec-title">Overview</h2><p>${node.desc || ('Reference for <b>'+node.title+'</b>.')}</p>`
+    + `<p class="muted">Part of <b>${node.parents[0] || node.title}</b>${node.parents[1] ? ' → <b>'+node.parents[1]+'</b>' : ''}. Tokens over values — if a value here isn't tokenized, that's a gap, not a license to hardcode.</p></section>`;
+  if(node.body) h += node.body;
+  if(node.children){
+    h += `<section class="sec" id="sec-in-this-section"><h2 class="sec-title">In this section</h2><div class="in-list">`
+      + node.children.map(c=>`<div class="row" onclick="selectPage('${findFirstLeaf(c)}')"><span>${c.title}</span>${ROW_CHEV}</div>`).join('')
+      + `</div></section>`;
+  }
+  const sibs = getSiblings(node);
+  if(sibs.length){
+    h += `<section class="sec" id="sec-related"><h2 class="sec-title">Related</h2><div class="in-list">`
+      + sibs.slice(0,5).map(id=>`<div class="row" onclick="selectPage('${id}')"><span>${byId[id].title}</span>${ROW_CHEV}</div>`).join('')
+      + `</div></section>`;
+  }
+  return h;
+}
+
+function render(id){
+  const node = byId[id];
+  if(!node){ contentEl.innerHTML = '<p class="muted">Page not found.</p>'; buildOutline([]); return; }
+  currentPage = id;
+  const crumb = node.parents.concat([node.title]).map((t,i,arr)=> i<arr.length-1 ? `${t}<span class="sep">/</span>` : t).join('');
+  const body = bodyForNode(node);
+  contentEl.innerHTML = `
+    <div class="crumb"><a class="link" href="index.html">Home</a><span class="sep">/</span><span class="link" onclick="goHome()">Design System</span><span class="sep">/</span>${crumb}</div>
+    <div class="title-row">
+      <h1 class="page-title">${node.title}</h1>
+      <div style="margin-left:auto">${feedbackDropdown(id)}</div>
+    </div>
+    <p class="page-desc">${node.desc || ''}</p>
+    ${metaboxes(node)}
+    ${body}
+    <div class="divider"></div>
+    ${helpfulWidget(id)}
+    ${pagerRow(id)}
+  `;
+  resetScroll();
+  buildOutline(outlineForBody(body));
+}
+
+// ---------- HOMEPAGE ----------
+const homeCards = [
+  { id:'foundations', label:'Foundations', desc:'Color, type, spacing, elevation, motion, icons.', icon:'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z' },
+  { id:'shells', label:'Layout Shells', desc:'Landing, docs, app, mobile, and email shells.', icon:'M3 11l9-8 9 8M5 10v10h14V10' },
+  { id:'components', label:'Components', desc:'Actions, forms, navigation, overlays, feedback.', icon:'M13 10V3L4 14h7v7l9-11h-7z' },
+  { id:'patterns', label:'Patterns', desc:'Task-level guidance across components.', icon:'M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14' },
+  { id:'dataviz', label:'Data Visualization', desc:'Categorical palette and chart rules.', icon:'M4 20V10m6 10V4m6 16v-7m4 7H2' },
+  { id:'theming', label:'Theming', desc:'One attribute swap drives light and dark.', icon:'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' },
+];
+const homeGuides = ['ds-color','ds-type','tokens-arch','ds-comp-actions','ds-comp-forms','dataviz'];
+
+function goHome(){
+  document.querySelectorAll('.nav-leaf').forEach(el=>el.classList.remove('active'));
+  currentPage = null;
+  contentEl.innerHTML = `
+    <div class="hero">
+      <h1>Anchor design system</h1>
+      <p>One system for every surface — marketing, docs, SaaS app, mobile, email. Tokens over values. Toggle the theme in the topbar to preview dark.</p>
+      <div class="search-big" onclick="openCmdk()">
+        <span>Search tokens, components, and patterns…</span>
+        <kbd>Ctrl + K</kbd>
+      </div>
+    </div>
+    <div class="callout"><b>Source of truth:</b> <span class="muted">this page. Full spec lives in <code class="inline">ANCHOR_DESIGN_SYSTEM.md</code>. Brand mark is the shared shield in <code class="inline">--accent</code>.</span></div>
+    <section class="sec" id="sec-explore">
+      <h2 class="sec-title" style="font-size:14px">Explore by section</h2>
+      <div class="home-grid">
+        ${homeCards.map(c=>`
+          <div class="home-card" onclick="selectPage('${findFirstLeaf(byId[c.id])}')">
+            <svg viewBox="0 0 24 24" fill="none"><path d="${c.icon}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="t">${c.label}</div>
+            <div class="d">${c.desc}</div>
+          </div>`).join('')}
+      </div>
+    </section>
+    <section class="sec" id="sec-guides">
+      <h2 class="sec-title" style="font-size:14px">Popular pages</h2>
+      <div class="in-list">
+        ${homeGuides.map(id=>`<div class="row" onclick="selectPage('${id}')"><span>${byId[id].title}</span>${ROW_CHEV}</div>`).join('')}
+      </div>
+    </section>
+    <section class="sec" id="sec-start">
+      <h2 class="sec-title" style="font-size:14px">New to the system?</h2>
+      <div class="in-list">
+        <div class="row" onclick="selectPage('principles')"><span>Read the principles first</span>${ROW_CHEV}</div>
+        <div class="row" onclick="selectPage('tokens-arch')"><span>Learn the three token tiers</span>${ROW_CHEV}</div>
+      </div>
+    </section>
+  `;
+  resetScroll();
+  buildOutline([
+    {id:'sec-explore', label:'Explore by section'},
+    {id:'sec-guides', label:'Popular pages'},
+    {id:'sec-start', label:'New to the system?'},
+  ]);
+}
+
+// ---------- CMD+K (scoped to DS tree) ----------
+const overlay = document.getElementById('cmdkOverlay');
+const cmdkInput = document.getElementById('cmdkInput');
+const cmdkResults = document.getElementById('cmdkResults');
+let cmdkMatches = [];
+let cmdkSelected = 0;
+function isCmdkOpen(){ return !overlay.classList.contains('hidden'); }
+function openCmdk(){
+  overlay.classList.remove('hidden');
+  cmdkInput.value = '';
+  cmdkFilter('');
+  setTimeout(()=>cmdkInput.focus(),10);
+}
+function closeCmdk(){ overlay.classList.add('hidden'); }
+function cmdkFilter(q){
+  const query = q.trim().toLowerCase();
+  cmdkMatches = flatOrder.filter(id=>{
+    const n = byId[id];
+    return !query || n.title.toLowerCase().includes(query) || n.parents.join(' ').toLowerCase().includes(query);
+  }).slice(0,40);
+  cmdkSelected = 0;
+  renderCmdkResults();
+}
+function renderCmdkResults(){
+  cmdkResults.innerHTML = cmdkMatches.length ? cmdkMatches.map((id,i)=>{
+    const n = byId[id];
+    const sel = i === cmdkSelected;
+    return `<div class="cmdk-row ${sel ? 'sel' : ''}" data-i="${i}" onclick="cmdkGo('${id}')" onmouseenter="cmdkHover(${i})">
+      <span class="trunc">${n.title}</span>
+      <span class="parents">${n.parents.join(' / ')}</span>
+    </div>`;
+  }).join('') : `<div class="cmdk-empty">No matches. Try a different term.</div>`;
+}
+function cmdkHover(i){ cmdkSelected = i; renderCmdkResults(); }
+function cmdkGo(id){ closeCmdk(); selectPage(id); }
+
+// ---------- CHAT (same docked pattern as docs) ----------
+function isChatOpen(){ return !document.getElementById('chatSide').classList.contains('hidden'); }
+function openChat(){
+  document.querySelector('.layout').classList.add('chat-open');
+  document.getElementById('chatSide').classList.remove('hidden');
+  setTimeout(()=>{ const i = document.getElementById('chatInput'); if(i) i.focus(); },10);
+}
+function closeChat(){
+  document.querySelector('.layout').classList.remove('chat-open');
+  document.getElementById('chatSide').classList.add('hidden');
+}
+function toggleChat(){ isChatOpen() ? closeChat() : openChat(); }
+function sendChat(){
+  const input = document.getElementById('chatInput');
+  const text = (input.value || '').trim();
+  if(!text) return;
+  const msgs = document.getElementById('chatMsgs');
+  const el = document.createElement('div');
+  el.className = 'chat-msg me';
+  el.textContent = text;
+  msgs.appendChild(el);
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function scrollSelectedIntoView(){
+  const el = cmdkResults.querySelector(`[data-i="${cmdkSelected}"]`);
+  if(el) el.scrollIntoView({ block: 'nearest' });
+}
+
+document.addEventListener('click', e=>{
+  const fb = e.target.closest('.fb-wrap');
+  if(!fb){
+    let changed = false;
+    for(const k of Object.keys(feedbackState)){ if(k.endsWith('-menu') && feedbackState[k]){ feedbackState[k]=false; changed=true; } }
+    if(changed && currentPage) render(currentPage);
+  }
+});
+document.addEventListener('keydown', e=>{
+  const fbOpen = !document.getElementById('fbOverlay').classList.contains('hidden');
+  if(fbOpen){ if(e.key==='Escape') closeFbOverlay(); return; }
+  if(isChatOpen()){
+    if(e.key==='Escape') closeChat();
+    return;
+  }
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    isCmdkOpen() ? closeCmdk() : openCmdk();
+    return;
+  }
+  if(!isCmdkOpen()) return;
+  if(e.key==='Escape'){ closeCmdk(); return; }
+  if(e.key==='ArrowDown'){
+    e.preventDefault();
+    if(cmdkMatches.length){ cmdkSelected = Math.min(cmdkSelected+1, cmdkMatches.length-1); renderCmdkResults(); scrollSelectedIntoView(); }
+    return;
+  }
+  if(e.key==='ArrowUp'){
+    e.preventDefault();
+    if(cmdkMatches.length){ cmdkSelected = Math.max(cmdkSelected-1, 0); renderCmdkResults(); scrollSelectedIntoView(); }
+    return;
+  }
+  if(e.key==='Enter'){
+    if(cmdkMatches[cmdkSelected]) cmdkGo(cmdkMatches[cmdkSelected]);
+  }
+});
+
+// init
+initTheme();
+goHome();
+</script>
+</body>
+</html>
