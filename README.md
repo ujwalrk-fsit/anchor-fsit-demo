@@ -18,7 +18,7 @@ Both are single static files. No build step, no dependencies — open either one
 - "Explore by capability": a window-framed explorer with Auth, SSO, MFA, RBAC, and Webhooks tabs — each swaps its description and runnable-style sample.
 - "Everything around the token": six pillar cards that open the docs.
 - Multi-column footer (Learn, API Reference, Community, More) plus legal strip.
-- Same design tokens and IBM Plex type as the docs for a consistent scale.
+- Same design tokens and DM Sans / DM Mono type as the docs for a consistent scale.
 
 ## Docs site
 
