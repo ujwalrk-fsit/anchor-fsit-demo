@@ -8,8 +8,10 @@ Anchor owns **who a user is and when they may act**. Applications keep ownership
 
 - `index.html` — public landing page: hero with product snapshot, code samples, capability explorer, and pillar overview.
 - `docs.html` — developer docs app: full pillar reference, guides, API/SDK pages, roadmap, and release notes.
+- `design-system.html` — design system app: tokens, shells, components, patterns, and WCAG 2.2 AA notes in the same docs shell.
+- `ANCHOR_DESIGN_SYSTEM.md` — printable spec mirroring `design-system.html`.
 
-Both are single static files. No build step, no dependencies — open either one in a browser. The landing brand and pillar cards link into the docs; the docs brand links back to the landing page.
+All are single static files. No build step, no dependencies — open any one in a browser. Landing, docs, and design system cross-link; the docs brand links back to the landing page.
 
 ## Landing page
 
@@ -19,16 +21,25 @@ Both are single static files. No build step, no dependencies — open either one
 - "Everything around the token": six pillar cards that open the docs.
 - Multi-column footer (Learn, API Reference, Community, More) plus legal strip.
 - Same design tokens and DM Sans / DM Mono type as the docs for a consistent scale.
+- Top bar carries Docs / Design System nav plus a light/dark toggle; the theme persists across all three pages (`anchor-theme`, OS default).
 
 ## Docs site
 
 - Three-column shell: collapsible sidebar nav, scrollable article column, "On this page" outline with scroll-spy. Sticky in-column footer with Privacy Policy, Terms of Use, Security, and © 2026 Fortunesoft IT Innovations.
-- Top bar: brand, version picker (`v2026.09` current), search pill (`Ctrl + K` command palette with keyboard navigation), Anchor AI assistant button, and tabs for API Reference, SDKs, Roadmap, Release Notes, Status.
+- Top bar: brand, version picker (`v2026.09` current), search pill (`Ctrl + K` command palette with keyboard navigation), Anchor AI assistant button, light/dark toggle, and tabs for API Reference, SDKs, Roadmap, Release Notes, Status, Design System.
 - Anchor AI assistant: sparkle-icon button docks a fourth column inside the layout — header, scrollable messages, input + send. Toggle from the top bar, close via X or Escape.
 - Stability signals everywhere: Beta and Deprecated chips in titles, `(Beta)` / `(Deprecated)` suffixes across nav and lists, and a meta strip (area / stability / date) on every page. Deprecated pages carry a migration callout with sunset pointer.
 - Article pages: breadcrumbs, in-this-section lists, related pages, prev/next pager, and a "Was this page helpful?" widget.
 - Feedback system: per-page Report an issue / Suggest a feature dialog with rating, validation, file attach, and description preview.
 - Roadmap (Phase 1 live Sept 2026, Phase 2 committed Q4 2026, Phase 3 sequenced H1 2027, Under evaluation) and chronological Release Notes back to the v1 release candidate.
+- Accessibility: skip link, keyboard-operable rows and cards, labelled inputs, `role=alert`/`role=status` feedback, and a contrast-verified palette (WCAG 2.2 AA, thinnest pair 4.69:1).
+
+## Design system site
+
+- Same three-column shell as the docs: section sidebar, article column, "On this page" outline with scroll-spy, identical in-column footer.
+- Covers principles, foundations (color/type/spacing/radius/elevation/motion/icons), the three-tier token architecture, all five layout shells, components, patterns, data visualization, voice, accessibility, theming, and do's/don'ts.
+- Brand color (`--brand #045E96`) is immutable across themes; the functional accent adapts (`#045E96` light / `#258AC6` dark) to hold contrast.
+- Roadmap and Release Notes tabs track the system's own shipped phases and changelog, mirroring the docs pattern.
 
 ## Platform coverage
 
@@ -88,7 +99,8 @@ Both are single static files. No build step, no dependencies — open either one
 ```bash
 # no install, no build
 open index.html         # start here
-open docs.html     # full reference
+open docs.html          # full reference
+open design-system.html # tokens, components, compliance
 ```
 
 ## Visit Docs
