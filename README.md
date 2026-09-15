@@ -1,4 +1,4 @@
-# Anchor — Internal Identity Platform
+# Anchor - Internal Identity Platform
 
 Centralized identity for all internal apps, so teams stop rebuilding login, sessions, password storage, and access control per project.
 
@@ -105,6 +105,6 @@ open design-system.html # tokens, components, compliance
 
 ## Visit Docs
 
-https://fsit-anchor-v1.vercel.app/
+https://anchor-fsit-demo.vercel.app/
 
 © 2026 Fortunesoft IT Innovations
