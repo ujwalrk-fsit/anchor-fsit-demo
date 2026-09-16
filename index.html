@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -11,31 +11,31 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FFFFFF;
-  --ink:#1B1F27; --dim:#434C59; --faint:#646D7A;
-  --surface:#F7F8FA; --raised:#F0F2F5;
-  --line:#E3E6EB; --line-soft:#EDEFF2; --line-strong:#767E8C;
-  --input-border:#767E8C; --scroll-thumb:#878F9E;
-  --accent:#045E96; --accent-soft:#E6F1F7; --accent-ink:#034A78;
-  --brand:#045E96; --brand-ink:#034A78;
-  --beta-ink:#93610C; --beta-bg:#FFF4E3; --beta-line:#F2DDAF;
-  --dep-ink:#912018; --dep-bg:#FEF3F2; --dep-line:#FECDCA;
-  --ok:#1C7A52; --ok-bg:#E7F4ED; --error:#B42318;
-  --mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
-  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+ --bg:#FFFFFF;
+ --ink:#1B1F27; --dim:#434C59; --faint:#646D7A;
+ --surface:#F7F8FA; --raised:#F0F2F5;
+ --line:#E3E6EB; --line-soft:#EDEFF2; --line-strong:#767E8C;
+ --input-border:#767E8C; --scroll-thumb:#878F9E;
+ --accent:#045E96; --accent-soft:#E6F1F7; --accent-ink:#034A78;
+ --brand:#045E96; --brand-ink:#034A78;
+ --beta-ink:#93610C; --beta-bg:#FFF4E3; --beta-line:#F2DDAF;
+ --dep-ink:#912018; --dep-bg:#FEF3F2; --dep-line:#FECDCA;
+ --ok:#1C7A52; --ok-bg:#E7F4ED; --error:#B42318;
+ --mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+ --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
 }
 [data-theme="dark"]{
-  --bg:#14171C;
-  --ink:#F3F5F7; --dim:#AEB6C2; --faint:#7A8494;
-  --surface:#1B1F27; --raised:#232833;
-  --line:#2C323D; --line-soft:#262B35; --line-strong:#6B7585;
-  --input-border:#6B7585; --scroll-thumb:#6E7889;
-  --accent:#258AC6; --accent-soft:#0F2E42; --accent-ink:#8AC7EE;
-  --brand:#045E96; --brand-ink:#034A78;
-  --ok:#3FBE85; --ok-bg:#0F2A1E;
-  --beta-ink:#E0A63D; --beta-bg:#2E2410; --beta-line:#4A3A18;
-  --dep-ink:#F0776A; --dep-bg:#331512; --dep-line:#4F1F1B;
-  --error:#F0776A;
+ --bg:#14171C;
+ --ink:#F3F5F7; --dim:#AEB6C2; --faint:#7A8494;
+ --surface:#1B1F27; --raised:#232833;
+ --line:#2C323D; --line-soft:#262B35; --line-strong:#6B7585;
+ --input-border:#6B7585; --scroll-thumb:#6E7889;
+ --accent:#258AC6; --accent-soft:#0F2E42; --accent-ink:#8AC7EE;
+ --brand:#045E96; --brand-ink:#034A78;
+ --ok:#3FBE85; --ok-bg:#0F2A1E;
+ --beta-ink:#E0A63D; --beta-bg:#2E2410; --beta-line:#4A3A18;
+ --dep-ink:#F0776A; --dep-bg:#331512; --dep-line:#4F1F1B;
+ --error:#F0776A;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
@@ -181,6 +181,24 @@ svg{display:block}
 .bento-mini-row .r{margin-left:auto;display:flex;align-items:center;gap:6px}
 .bento-pill{font-family:var(--mono);font-size:10px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
 
+/* ---- docs banner + faq (below bento) ---- */
+.lp-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--ink)}
+.lp-banner h3{font-size:14px;font-weight:600;margin:0 0 4px}
+.lp-banner p{font-size:12.5px;margin:0;color:var(--dim);line-height:1.5}
+.lp-banner .btn-primary{flex-shrink:0}
+@media(max-width:560px){.lp-banner{flex-direction:column;align-items:flex-start}}
+.lp-faq{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.lp-faq-item{border:1px solid var(--line);border-radius:8px;background:var(--bg);overflow:hidden}
+.lp-faq-item[open] .lp-faq-q{color:var(--ink)}
+.lp-faq-q{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--dim)}
+.lp-faq-q::-webkit-details-marker{display:none}
+.lp-faq-q:hover{color:var(--ink)}
+.lp-faq-q svg{width:14px;height:14px;color:var(--faint);flex-shrink:0;transition:transform .15s}
+.lp-faq-item[open] .lp-faq-q svg{transform:rotate(180deg);color:var(--accent)}
+.lp-faq-a{padding:0 14px 12px;font-size:13px;color:var(--dim);line-height:1.55}
+.lp-faq-a a{color:var(--accent);text-decoration:none}
+.lp-faq-a a:hover{text-decoration:underline}
+
 /* ---- footer (same markup as docs) ---- */
 .footer{border-top:1px solid var(--line);background:var(--bg);padding:28px 0 20px;font-size:12px;color:var(--dim)}
 .f-inner{max-width:1080px;margin:0 auto;padding:0 20px;width:100%}
@@ -205,256 +223,290 @@ svg{display:block}
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="lp-top">
-  <div class="brand">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
-    <b>Anchor</b>
-  </div>
-  <div class="spacer"></div>
-  <nav class="topnav">
-    <a href="docs.html">Docs</a>
-    <a href="design-system.html">Design System</a>
-  </nav>
-  <button class="icon-btn theme-btn" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle theme">
-    <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="themeIconSun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-  </button>
+ <div class="brand">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
+ <b>Anchor</b>
+ </div>
+ <div class="spacer"></div>
+ <nav class="topnav">
+ <a href="docs.html">Docs</a>
+ <a href="design-system.html">Design System</a>
+ </nav>
+ <button class="icon-btn theme-btn" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle theme">
+ <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+ <svg id="themeIconSun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+ </button>
 </header>
 
 <div class="lp-wrap" id="main" tabindex="-1">
-  <section class="lp-hero-grid">
-    <div class="lp-hero">
-      <span class="lp-kicker">v2026.09 — now live</span>
-      <h1>Identity, centralized for every internal app.</h1>
-      <p>Anchor owns login, SSO, MFA, users, and access control — so product teams stop rebuilding auth and start shipping. One hosted login, one token service, one audit trail.</p>
-      <div class="cta-row">
-        <a class="btn-primary" href="docs.html">Open the docs<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="btn" href="docs.html">Add login in 15 minutes</a>
-      </div>
-    </div>
-    <div class="aw" id="aw">
-      <div class="aw-bar">
-        <span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span>
-        <span class="aw-title">Anchor — acme</span>
-        <span class="aw-pill">● operational</span>
-      </div>
-      <div class="aw-wrap">
-        <nav class="aw-side" id="awSide" aria-label="Anchor console"></nav>
-        <div class="aw-main" id="awMain"></div>
-      </div>
-    </div>
+ <section class="lp-hero-grid">
+ <div class="lp-hero">
+ <span class="lp-kicker">v2026.09 - now live</span>
+ <h1>Identity, centralized for every internal app.</h1>
+ <p>Anchor owns login, SSO, MFA, users, and access control, so product teams stop rebuilding auth and start shipping. One hosted login, one token service, one audit trail.</p>
+ <div class="cta-row">
+ <a class="btn-primary" href="docs.html">Open the docs<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ <a class="btn" href="docs.html">Add login in 15 minutes</a>
+ </div>
+ </div>
+ <div class="aw" id="aw">
+ <div class="aw-bar">
+ <span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span>
+ <span class="aw-title">Anchor - acme</span>
+ <span class="aw-pill">● operational</span>
+ </div>
+ <div class="aw-wrap">
+ <nav class="aw-side" id="awSide" aria-label="Anchor console"></nav>
+ <div class="aw-main" id="awMain"></div>
+ </div>
+ </div>
+ </section>
+
+ <section class="lp-sec">
+ <h2>An identity platform for developers and agents</h2>
+ <p class="sub">Drop in the SDK, redirect to hosted login, validate the token. Defaults are production-safe; overrides are per-org and audit-logged.</p>
+ <div class="lp-two">
+ <ul class="check">
+ <li><span class="tick">✓</span><span><b>Hosted login + SDKs</b>, no auth UI to build or patch</span></li>
+ <li><span class="tick">✓</span><span><b>OIDC &amp; SAML SSO</b> with cross-app sessions</span></li>
+ <li><span class="tick">✓</span><span><b>TOTP + WebAuthn MFA</b> with per-org policies</span></li>
+ <li><span class="tick">✓</span><span><b>Roles in tokens</b> plus an immutable audit log</span></li>
+ <li><span class="tick">✓</span><span><b>Sandbox tenants</b> and request-level debug logs</span></li>
+ <li><span class="tick">✓</span><span><b>Webhooks</b> for lifecycle events, no polling</span></li>
+ </ul>
+ <div class="code-panel">
+ <div class="code-tabs" id="lpCodeTabs">
+ <button data-lang="js" class="active" onclick="lpCodeTab('js')">JavaScript</button>
+ <button data-lang="py" onclick="lpCodeTab('py')">Python</button>
+ <button data-lang="curl" onclick="lpCodeTab('curl')">cURL</button>
+ </div>
+ <pre><code id="lpCode"></code></pre>
+ </div>
+ </div>
+ </section>
+
+ <section class="lp-sec">
+ <h2>Explore by capability</h2>
+ <p class="sub">Pick a pillar, every sample runs against your sandbox tenant.</p>
+ <p class="feat-desc" id="lpFeatDesc"></p>
+ <div class="win">
+ <div class="win-bar">
+ <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+ <span class="win-title">anchor - sandbox</span>
+ </div>
+ <div class="code-tabs" id="lpFeatTabs">
+ <button data-feat="auth" class="active" onclick="lpFeature('auth')">Auth</button>
+ <button data-feat="sso" onclick="lpFeature('sso')">SSO</button>
+ <button data-feat="mfa" onclick="lpFeature('mfa')">MFA</button>
+ <button data-feat="rbac" onclick="lpFeature('rbac')">RBAC</button>
+ <button data-feat="webhooks" onclick="lpFeature('webhooks')">Webhooks</button>
+ </div>
+ <div class="win-body">
+ <div class="code-panel"><pre><code id="lpFeatCode"></code></pre></div>
+ </div>
+ </div>
+ </section>
+
+ <section class="lp-sec">
+ <h2>Everything around the token</h2>
+ <p class="sub">Six pillars, one platform team, per-pillar SLA commitments.</p>
+ <div class="bento" id="lpGrid"></div>
+ </section>
+
+  <section class="lp-sec">
+    <h2>Frequently asked questions</h2>
+    <p class="sub">Everything teams ask before going live, answered once, kept in sync with the docs.</p>
+    <div class="lp-faq" id="lpFaq"></div>
   </section>
 
   <section class="lp-sec">
-    <h2>An identity platform for developers and agents</h2>
-    <p class="sub">Drop in the SDK, redirect to hosted login, validate the token. Defaults are production-safe; overrides are per-org and audit-logged.</p>
-    <div class="lp-two">
-      <ul class="check">
-        <li><span class="tick">✓</span><span><b>Hosted login + SDKs</b> — no auth UI to build or patch</span></li>
-        <li><span class="tick">✓</span><span><b>OIDC &amp; SAML SSO</b> with cross-app sessions</span></li>
-        <li><span class="tick">✓</span><span><b>TOTP + WebAuthn MFA</b> with per-org policies</span></li>
-        <li><span class="tick">✓</span><span><b>Roles in tokens</b> plus an immutable audit log</span></li>
-        <li><span class="tick">✓</span><span><b>Sandbox tenants</b> and request-level debug logs</span></li>
-        <li><span class="tick">✓</span><span><b>Webhooks</b> for lifecycle events — no polling</span></li>
-      </ul>
-      <div class="code-panel">
-        <div class="code-tabs" id="lpCodeTabs">
-          <button data-lang="js" class="active" onclick="lpCodeTab('js')">JavaScript</button>
-          <button data-lang="py" onclick="lpCodeTab('py')">Python</button>
-          <button data-lang="curl" onclick="lpCodeTab('curl')">cURL</button>
-        </div>
-        <pre><code id="lpCode"></code></pre>
+    <div class="lp-banner">
+      <div>
+        <h3>Start building with Anchor today</h3>
+        <p>Hosted login, cross-app SSO, and token handling, live in your sandbox in minutes.</p>
       </div>
+      <a class="btn-primary" href="docs.html">Open the docs <svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
-  </section>
-
-  <section class="lp-sec">
-    <h2>Explore by capability</h2>
-    <p class="sub">Pick a pillar — every sample runs against your sandbox tenant.</p>
-    <p class="feat-desc" id="lpFeatDesc"></p>
-    <div class="win">
-      <div class="win-bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="win-title">anchor — sandbox</span>
-      </div>
-      <div class="code-tabs" id="lpFeatTabs">
-        <button data-feat="auth" class="active" onclick="lpFeature('auth')">Auth</button>
-        <button data-feat="sso" onclick="lpFeature('sso')">SSO</button>
-        <button data-feat="mfa" onclick="lpFeature('mfa')">MFA</button>
-        <button data-feat="rbac" onclick="lpFeature('rbac')">RBAC</button>
-        <button data-feat="webhooks" onclick="lpFeature('webhooks')">Webhooks</button>
-      </div>
-      <div class="win-body">
-        <div class="code-panel"><pre><code id="lpFeatCode"></code></pre></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-sec">
-    <h2>Everything around the token</h2>
-    <p class="sub">Six pillars, one platform team, per-pillar SLA commitments.</p>
-    <div class="bento" id="lpGrid"></div>
   </section>
 </div>
 
 <footer class="footer">
  <div class="f-inner">
-  <div class="footer-grid">
-    <div>
-      <div class="f-brand">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
-        <span>Anchor</span>
-      </div>
-      <div class="f-tag">Internal identity platform — login, SSO, MFA, users, and access control, built once.</div>
-      <div class="f-copy">&copy; 2026 Fortunesoft IT Innovations</div>
-    </div>
-    <div>
-      <div class="f-head">Learn</div>
-      <a class="f-link" href="docs.html">Quickstart</a>
-      <a class="f-link" href="docs.html">Core Concepts</a>
-      <a class="f-link" href="docs.html">Architecture</a>
-      <a class="f-link" href="docs.html">Environments</a>
-    </div>
-    <div>
-      <div class="f-head">API Reference</div>
-      <a class="f-link" href="docs.html">Authentication</a>
-      <a class="f-link" href="docs.html">Users</a>
-      <a class="f-link" href="docs.html">RBAC</a>
-      <a class="f-link" href="docs.html">Webhooks</a>
-    </div>
-    <div>
-      <div class="f-head">Community</div>
-      <a class="f-link" href="docs.html">Platform Charter</a>
-      <a class="f-link" href="docs.html">RFC Process</a>
-      <a class="f-link" href="docs.html">Support</a>
-      <a class="f-link" href="docs.html">Status</a>
-    </div>
-    <div>
-      <div class="f-head">More</div>
-      <a class="f-link" href="docs.html">Roadmap</a>
-      <a class="f-link" href="docs.html">Release Notes</a>
-      <a class="f-link" href="design-system.html">Design System</a>
-      <a class="f-link" href="docs.html">Privacy Policy</a>
-      <a class="f-link" href="docs.html">Terms of Use</a>
-      <a class="f-link" href="docs.html">Security</a>
-    </div>
-  </div>
-  <div class="f-bottom">
-    <a href="docs.html">Privacy Policy</a>
-    <span class="sep">|</span>
-    <a href="docs.html">Terms of Use</a>
-    <span class="sep">|</span>
-    <a href="docs.html">Security</a>
-    <span class="copy">&copy; 2026 Fortunesoft IT Innovations</span>
-  </div>
+ <div class="footer-grid">
+ <div>
+ <div class="f-brand">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
+ <span>Anchor</span>
+ </div>
+ <div class="f-tag">Internal identity platform, login, SSO, MFA, users, and access control, built once.</div>
+ <div class="f-copy">&copy; 2026 Fortunesoft IT Innovations</div>
+ </div>
+ <div>
+ <div class="f-head">Learn</div>
+ <a class="f-link" href="docs.html">Quickstart</a>
+ <a class="f-link" href="docs.html">Core Concepts</a>
+ <a class="f-link" href="docs.html">Architecture</a>
+ <a class="f-link" href="docs.html">Environments</a>
+ </div>
+ <div>
+ <div class="f-head">API Reference</div>
+ <a class="f-link" href="docs.html">Authentication</a>
+ <a class="f-link" href="docs.html">Users</a>
+ <a class="f-link" href="docs.html">RBAC</a>
+ <a class="f-link" href="docs.html">Webhooks</a>
+ </div>
+ <div>
+ <div class="f-head">Community</div>
+ <a class="f-link" href="docs.html">Platform Charter</a>
+ <a class="f-link" href="docs.html">RFC Process</a>
+ <a class="f-link" href="docs.html">Support</a>
+ <a class="f-link" href="docs.html">Status</a>
+ </div>
+ <div>
+ <div class="f-head">More</div>
+ <a class="f-link" href="docs.html">Roadmap</a>
+ <a class="f-link" href="docs.html">Release Notes</a>
+ <a class="f-link" href="design-system.html">Design System</a>
+ <a class="f-link" href="docs.html">Privacy Policy</a>
+ <a class="f-link" href="docs.html">Terms of Use</a>
+ <a class="f-link" href="docs.html">Security</a>
+ </div>
+ </div>
+ <div class="f-bottom">
+ <a href="docs.html">Privacy Policy</a>
+ <span class="sep">|</span>
+ <a href="docs.html">Terms of Use</a>
+ <span class="sep">|</span>
+ <a href="docs.html">Security</a>
+ <span class="copy">&copy; 2026 Fortunesoft IT Innovations</span>
+ </div>
  </div>
 </footer>
 
 <script>
 /* ---- shared persistent theme (anchor-theme, OS default) ---- */
 function syncThemeIcon(t){
-  var m=document.getElementById('themeIconMoon'),s=document.getElementById('themeIconSun');
-  if(!m||!s)return;
-  var d=t==='dark';
-  m.classList.toggle('hidden',d);
-  s.classList.toggle('hidden',!d);
+ var m=document.getElementById('themeIconMoon'),s=document.getElementById('themeIconSun');
+ if(!m||!s)return;
+ var d=t==='dark';
+ m.classList.toggle('hidden',d);
+ s.classList.toggle('hidden',!d);
 }
 function initTheme(){
-  var t=null;
-  try{t=localStorage.getItem('anchor-theme');}catch(e){}
-  if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
-  document.documentElement.setAttribute('data-theme',t);
-  syncThemeIcon(t);
+ var t=null;
+ try{t=localStorage.getItem('anchor-theme');}catch(e){}
+ if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+ document.documentElement.setAttribute('data-theme',t);
+ syncThemeIcon(t);
 }
 function toggleTheme(){
-  var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
-  document.documentElement.setAttribute('data-theme',c);
-  try{localStorage.setItem('anchor-theme',c);}catch(e){}
-  syncThemeIcon(c);
+ var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+ document.documentElement.setAttribute('data-theme',c);
+ try{localStorage.setItem('anchor-theme',c);}catch(e){}
+ syncThemeIcon(c);
 }
 var lpSamples = {
-  js: "import { Anchor } from '@anchor/web';\n\nconst anchor = new Anchor({ tenant: 'acme-sandbox' });\n\n// Redirect to hosted login — no auth UI to build\nawait anchor.login({ redirectUri: window.location.origin + '/callback' });",
-  py: "from anchor import Anchor\n\nanchor = Anchor(tenant='acme-sandbox')\n\n# Validate the access token server-side\nsession = anchor.tokens.verify(access_token)\nprint(session['sub'], session['roles'])",
-  curl: "curl https://anchor.internal/v1/token \\\n  -d grant_type=authorization_code \\\n  -d code=$CODE \\\n  -d redirect_uri=$APP_URL/callback"
+ js: "import { Anchor } from '@anchor/web';\n\nconst anchor = new Anchor({ tenant: 'acme-sandbox' });\n\n// Redirect to hosted login, no auth UI to build\nawait anchor.login({ redirectUri: window.location.origin + '/callback' });",
+ py: "from anchor import Anchor\n\nanchor = Anchor(tenant='acme-sandbox')\n\n# Validate the access token server-side\nsession = anchor.tokens.verify(access_token)\nprint(session['sub'], session['roles'])",
+ curl: "curl https://anchor.internal/v1/token \\\n -d grant_type=authorization_code \\\n -d code=$CODE \\\n -d redirect_uri=$APP_URL/callback"
 };
 function lpCodeTab(lang){
-  document.querySelectorAll('#lpCodeTabs button').forEach(function(b){
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
-  document.getElementById('lpCode').textContent = lpSamples[lang];
+ document.querySelectorAll('#lpCodeTabs button').forEach(function(b){
+ b.classList.toggle('active', b.dataset.lang === lang);
+ });
+ document.getElementById('lpCode').textContent = lpSamples[lang];
 }
 
 var lpFeatures = {
-  auth: { desc: 'Hosted login via redirect — the default for new integrations. Authorization code flow with PKCE.', code: "await anchor.login({ redirectUri: APP_URL + '/callback' });\n// ...user returns with ?code=...\nconst tokens = await anchor.exchange(code);" },
-  sso: { desc: 'Single sign-on with OIDC brokering — one session shared across every registered internal app.', code: "curl https://anchor.internal/v1/authorize \\\n  -d client_id=$CLIENT_ID \\\n  -d response_type=code \\\n  -d scope='openid profile'" },
-  mfa: { desc: 'Step up with TOTP by default, WebAuthn for phishing resistance. Enforce per-org or per-action.', code: "const ok = await anchor.mfa.verify({ factor: 'totp', code });\nif (!ok) throw new Error('second factor required');" },
-  rbac: { desc: 'Roles travel in the token. Check a permission, not a role name, at the enforcement point.', code: "if (!session['permissions'].includes('billing:refund')):\n    raise Forbidden('missing billing:refund')" },
-  webhooks: { desc: 'Subscribe to user and org lifecycle events instead of polling the management API.', code: "anchor.webhooks.verify(req.body, req.headers['x-anchor-sig']);\n// events: user.created, user.disabled, role.changed" }
+ auth: { desc: 'Hosted login via redirect, the default for new integrations. Authorization code flow with PKCE.', code: "await anchor.login({ redirectUri: APP_URL + '/callback' });\n// ...user returns with ?code=...\nconst tokens = await anchor.exchange(code);" },
+ sso: { desc: 'Single sign-on with OIDC brokering, one session shared across every registered internal app.', code: "curl https://anchor.internal/v1/authorize \\\n -d client_id=$CLIENT_ID \\\n -d response_type=code \\\n -d scope='openid profile'" },
+ mfa: { desc: 'Step up with TOTP by default, WebAuthn for phishing resistance. Enforce per-org or per-action.', code: "const ok = await anchor.mfa.verify({ factor: 'totp', code });\nif (!ok) throw new Error('second factor required');" },
+ rbac: { desc: 'Roles travel in the token. Check a permission, not a role name, at the enforcement point.', code: "if (!session['permissions'].includes('billing:refund')):\n raise Forbidden('missing billing:refund')" },
+ webhooks: { desc: 'Subscribe to user and org lifecycle events instead of polling the management API.', code: "anchor.webhooks.verify(req.body, req.headers['x-anchor-sig']);\n// events: user.created, user.disabled, role.changed" }
 };
 function lpFeature(key){
-  document.querySelectorAll('#lpFeatTabs button').forEach(function(b){
-    b.classList.toggle('active', b.dataset.feat === key);
-  });
-  document.getElementById('lpFeatDesc').textContent = lpFeatures[key].desc;
-  document.getElementById('lpFeatCode').textContent = lpFeatures[key].code;
+ document.querySelectorAll('#lpFeatTabs button').forEach(function(b){
+ b.classList.toggle('active', b.dataset.feat === key);
+ });
+ document.getElementById('lpFeatDesc').textContent = lpFeatures[key].desc;
+ document.getElementById('lpFeatCode').textContent = lpFeatures[key].code;
 }
 
 var lpCards = [
-  { t: 'Authentication', d: 'Login, SSO, MFA, sessions, and token handling.', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v2', span:'wide',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>hosted login</code><span class="bento-pill">redirect</span><span class="r"><span class="l">PKCE</span></span></div><div class="bento-mini-row"><code>oidc.login</code><span>cross-app SSO</span><span class="r"><span class="l">2s ago</span></span></div></div>' },
-  { t: 'User Management', d: 'Accounts, orgs, tenancy, and provisioning.', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75', span:'tall',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-ico">AK</span><span>ak@acme</span><span class="r"><code>admin</code></span></div><div class="bento-mini-row"><span class="aw-ico">MR</span><span>mira@acme</span><span class="r"><code>member</code></span></div><div class="bento-mini-row"><span class="aw-ico">JL</span><span>jin@acme</span><span class="r"><span class="l">invited</span></span></div><div class="bento-mini-row" style="border-top:1px dashed var(--line)"><span class="aw-dot ok"></span><span>SCIM synced</span><span class="r"><span class="l">214 users</span></span></div><div class="bento-mini-row"><span class="aw-dot amber"></span><span>Pending review</span><span class="r"><span class="l">18</span></span></div></div>' },
-  { t: 'Roles & Access Control', d: 'Roles, permissions, policy engine, audit trail.', icon: 'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4', span:'',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>billing:refund</code><span class="r"><span class="aw-dot ok"></span><span class="l">in token</span></span></div><div class="bento-mini-row"><code>audit.role_changed</code><span class="r"><span class="l">immutable</span></span></div></div>' },
-  { t: 'Compliance & Security', d: 'Certifications, encryption, data governance.', icon: 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z', span:'',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-dot ok"></span><span>SOC 2 Type II</span><span class="r"><span class="l">tracked</span></span></div><div class="bento-mini-row"><span class="aw-dot ok"></span><span>GDPR + DPDP</span><span class="r"><span class="l">masked</span></span></div></div>' },
-  { t: 'Integrations', d: 'Connector framework, federation, KYC, social login.', icon: 'M13 10V3L4 14h7v7l9-11h-7z', span:'wide',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>SAML</code><span class="bento-pill">brokered</span><code>OIDC</code><span class="r l">Persona</span></div><div class="bento-mini-row"><code>Google</code><code>GitHub</code><code>Microsoft</code><span class="r l">social</span></div></div>' },
-  { t: 'Clients & SDKs', d: 'Web, mobile, backend, and CLI libraries.', icon: 'M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14', span:'',
-    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>@anchor/web</code><span class="r l">JS/React</span></div><div class="bento-mini-row"><code>anchor.verify()</code><span class="r l">Node/Python</span></div></div>' }
+ { t: 'Authentication', d: 'Login, SSO, MFA, sessions, and token handling.', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v2', span:'wide',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><code>hosted login</code><span class="bento-pill">redirect</span><span class="r"><span class="l">PKCE</span></span></div><div class="bento-mini-row"><code>oidc.login</code><span>cross-app SSO</span><span class="r"><span class="l">2s ago</span></span></div></div>' },
+ { t: 'User Management', d: 'Accounts, orgs, tenancy, and provisioning.', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75', span:'tall',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-ico">AK</span><span>ak@acme</span><span class="r"><code>admin</code></span></div><div class="bento-mini-row"><span class="aw-ico">MR</span><span>mira@acme</span><span class="r"><code>member</code></span></div><div class="bento-mini-row"><span class="aw-ico">JL</span><span>jin@acme</span><span class="r"><span class="l">invited</span></span></div><div class="bento-mini-row" style="border-top:1px dashed var(--line)"><span class="aw-dot ok"></span><span>SCIM synced</span><span class="r"><span class="l">214 users</span></span></div><div class="bento-mini-row"><span class="aw-dot amber"></span><span>Pending review</span><span class="r"><span class="l">18</span></span></div></div>' },
+ { t: 'Roles & Access Control', d: 'Roles, permissions, policy engine, audit trail.', icon: 'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4', span:'',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><code>billing:refund</code><span class="r"><span class="aw-dot ok"></span><span class="l">in token</span></span></div><div class="bento-mini-row"><code>audit.role_changed</code><span class="r"><span class="l">immutable</span></span></div></div>' },
+ { t: 'Compliance & Security', d: 'Certifications, encryption, data governance.', icon: 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z', span:'',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-dot ok"></span><span>SOC 2 Type II</span><span class="r"><span class="l">tracked</span></span></div><div class="bento-mini-row"><span class="aw-dot ok"></span><span>GDPR + DPDP</span><span class="r"><span class="l">masked</span></span></div></div>' },
+ { t: 'Integrations', d: 'Connector framework, federation, KYC, social login.', icon: 'M13 10V3L4 14h7v7l9-11h-7z', span:'wide',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><code>SAML</code><span class="bento-pill">brokered</span><code>OIDC</code><span class="r l">Persona</span></div><div class="bento-mini-row"><code>Google</code><code>GitHub</code><code>Microsoft</code><span class="r l">social</span></div></div>' },
+ { t: 'Clients & SDKs', d: 'Web, mobile, backend, and CLI libraries.', icon: 'M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14', span:'',
+ mini:'<div class="bento-mini"><div class="bento-mini-row"><code>@anchor/web</code><span class="r l">JS/React</span></div><div class="bento-mini-row"><code>anchor.verify()</code><span class="r l">Node/Python</span></div></div>' }
 ];
 document.getElementById('lpGrid').innerHTML = lpCards.map(function(c){
-  return '<div class="bento-card ' + c.span + '" tabindex="0" role="link" aria-label="' + c.t + '" onclick="location.href=\'docs.html\'"><svg class="b-ico" viewBox="0 0 24 24" fill="none"><path d="' + c.icon + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">' + c.t + '</div><div class="d">' + c.d + '</div>' + c.mini + '</div>';
+ return '<div class="bento-card ' + c.span + '" tabindex="0" role="link" aria-label="' + c.t + '" onclick="location.href=\'docs.html\'"><svg class="b-ico" viewBox="0 0 24 24" fill="none"><path d="' + c.icon + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">' + c.t + '</div><div class="d">' + c.d + '</div>' + c.mini + '</div>';
+}).join('');
+
+var lpFaqs = [
+ { q:'Do we need to build our own login UI?', a:'No. Use the <b>hosted login</b> by default, Anchor owns the page, PKCE, and brute-force protections. The embedded SDK is beta for in-product flows only. See <a href="docs.html">Hosted Login</a>.' },
+ { q:'Which SSO protocol should we pick?', a:'<b>OIDC with PKCE</b> is the default for new apps. Use <b>SAML 2.0</b> only for enterprise tenants that don’t speak OIDC. Cross-app SSO shares one session across every registered internal product.' },
+ { q:'How is MFA enforced?', a:'Org admins enforce <b>TOTP</b> by default and <b>WebAuthn / passkeys</b> (beta) for phishing resistance. You can require step-up per-action, e.g. <code>billing:refund</code>. SMS fallback is deprecated.' },
+ { q:'Where do roles and permissions live?', a:'In the token. Attach roles to users or groups and carry them as <code>roles</code> and <code>permissions</code> claims. All role changes are <b>immutable audit-logged</b>.' },
+ { q:'How does SCIM provisioning work?', a:'Connect your IdP via <b>SCIM</b> (beta) for create/update/de-provisioning. Supports delegated admin per org and team hierarchy with inheritance. See <a href="docs.html">Organizations &amp; Tenancy</a>.' },
+ { q:'What happens on logout or a compromised device?', a:'Use <b>token rotation &amp; revocation</b>, refresh tokens rotate atomically per device and you can revoke sessions or devices via the Device &amp; Session Management APIs.' }
+];
+document.getElementById('lpFaq').innerHTML = lpFaqs.map(function(f,i){
+ return '<details class="lp-faq-item"' + (i===0?' open':'') + '><summary class="lp-faq-q">' + f.q + '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="lp-faq-a">' + f.a + '</div></details>';
 }).join('');
 
 // ---- interactive hero window (namespaced: awTab, awData) ----
 var awTab = 'users';
 var awData = {
-  users: { h:'Users', meta:'214 in acme', body:
-    '<div class="aw-stat-grid"><div class="aw-stat" onclick="awTabGo(\'users\')"><div class="n">214</div><div class="l">users in acme</div></div><div class="aw-stat" onclick="awTabGo(\'orgs\')"><div class="n">3</div><div class="l">teams</div></div><div class="aw-stat"><div class="n">18</div><div class="l">invited</div></div></div>'
-    + '<div class="aw-kpi"><div class="aw-chart"><h5>7-day growth</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,28 20,24 35,18 50,20 65,12 80,14 100,4" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="4" r="2.5" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>+12% WoW</span></div></div><div class="aw-chart"><h5>by role</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48" style="flex-shrink:0"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="55 45" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-30" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--accent)"></i>admin 55%</span><span><i style="background:var(--ok)"></i>member 30%</span><span><i style="background:var(--line)"></i>invited 15%</span></div></div></div></div>'
-    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-ico">AK</span><span><b>ak@acme</b> — admin</span><span class="aw-dot ok"></span><time>now</time></div><div class="aw-row"><span class="aw-ico">MR</span><span>mira@acme — member</span><time>2m</time></div><div class="aw-row"><span class="aw-ico">JL</span><span>jin@acme — invited</span><span class="aw-dot amber"></span><time>1h</time></div></div>'
-    + '<div class="aw-chart" style="margin-top:8px"><h5>provisioning</h5><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim)"><span>SCIM sync</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:92%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">synced</span></div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim);margin-top:6px"><span>Invites pending</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:32%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">18</span></div></div>'
-  },
-  sessions: { h:'Sessions', meta:'3 active', body:
-    '<div class="aw-kpi"><div class="aw-chart"><h5>active — 24h</h5><svg viewBox="0 0 100 36" width="100%" height="36"><rect x="2" y="18" width="12" height="10" rx="2" fill="var(--accent)"/><rect x="18" y="14" width="12" height="14" rx="2" fill="var(--accent)"/><rect x="34" y="8" width="12" height="20" rx="2" fill="var(--accent)"/><rect x="50" y="12" width="12" height="16" rx="2" fill="var(--accent)"/><rect x="66" y="20" width="12" height="8" rx="2" fill="var(--line)"/><rect x="82" y="16" width="12" height="12" rx="2" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>active</span><span><i style="background:var(--line)"></i>revoked</span></div></div><div class="aw-chart"><h5>by device</h5><div style="margin-top:2px"><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)"><span>macOS</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:62%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">62%</span></div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:6px"><span>iOS &nbsp;&nbsp;&nbsp;</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:28%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">28%</span></div></div></div></div>'
-    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>mbp-04</code><span>macOS · SF</span><time>now</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>iphone-12</code><span>iOS · SF</span><time>12m</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>stolen-laptop</code><span>revoked</span><time>1h</time></div></div>'
-  },
-  audit: { h:'Audit log', meta:'immutable', body:
-    '<div class="aw-chart"><h5>events / hour — today</h5><svg viewBox="0 0 100 40" width="100%" height="40"><rect x="6" y="24" width="10" height="12" rx="2" fill="var(--accent)"/><rect x="22" y="18" width="10" height="18" rx="2" fill="var(--accent)"/><rect x="38" y="10" width="10" height="26" rx="2" fill="var(--ok)"/><rect x="54" y="20" width="10" height="16" rx="2" fill="var(--beta-ink)"/><rect x="70" y="14" width="10" height="22" rx="2" fill="var(--accent)"/><rect x="86" y="26" width="8" height="10" rx="2" fill="var(--line)"/></svg></div>'
-    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>oidc.login</code><span>cross-app SSO</span><time>2s</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>token.rotated</code><span>device mbp-04</span><time>41s</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>mfa.step_up</code><span>billing:refund</span><time>3m</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>scim.sync</code><span>214 users</span><time>9m</time></div></div>'
-    + '<div class="aw-chart" style="margin-top:8px"><h5>selected event — mfa.step_up</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">actor</span> mira@acme <span style="color:var(--faint)">· IP</span> 203.0.113.42</div><div><span style="color:var(--faint)">policy</span> enforce_mfa(billing:*) <span style="color:var(--ok)">● enforced</span></div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">immutable</span><span class="bento-pill" style="background:var(--ok-bg);color:var(--ok)">verified</span></div></div></div>'
-  },
-  tokens: { h:'Tokens', meta:'JWT', body:
-    '<div class="aw-kpi"><div class="aw-chart"><h5>issuance — 24h</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,30 18,26 34,22 52,18 68,10 84,12 100,6" stroke="var(--ok)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="6" r="2.5" fill="var(--ok)"/></svg><div class="aw-legend"><span><i style="background:var(--ok)"></i>1.2k / h</span></div></div><div class="aw-chart"><h5>by type</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="65 35" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-40" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--ok)"></i>access 65%</span><span><i style="background:var(--accent)"></i>refresh 22%</span><span><i style="background:var(--line)"></i>ID 13%</span></div></div></div></div>'
-    + '<div class="aw-json" style="margin-top:8px">{\n  "sub": "ak@acme",\n  "roles": ["admin"],\n  "permissions": ["billing:refund"]\n}</div>'
-    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><code>access</code><span>15m</span><time>rotates</time></div><div class="aw-row"><code>refresh</code><span>30d</span><time>revocable</time></div></div>'
-    + '<div class="aw-chart" style="margin-top:8px"><h5>inspect — ak@acme</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">exp</span> 15m <span style="color:var(--ok)">● valid</span><span style="margin-left:8px;color:var(--faint)">rotation</span> atomic</div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">copy token</span><span class="bento-pill" style="background:var(--dep-bg);color:var(--dep-ink)">revoke</span></div></div></div>'
-  },
-  orgs: { h:'Orgs', meta:'acme', body:
-    '<div class="aw-chart"><h5>users per team</h5><div style="display:flex;flex-direction:column;gap:6px;margin-top:4px"><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">eng</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:68%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">38</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">billing</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:22%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">8</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">platform</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:30%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">12</span></div></div></div>'
-    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><span><b>acme</b> — root</span><time>3 teams</time></div><div class="aw-row" style="padding-left:24px"><span>↳ platform</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">12 users</span></div><div class="aw-row" style="padding-left:24px"><span>↳ billing</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">8 users</span></div><div class="aw-row" style="padding-left:24px"><span>↳ eng</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">38 users</span></div></div>'
-  }
+ users: { h:'Users', meta:'214 in acme', body:
+ '<div class="aw-stat-grid"><div class="aw-stat" onclick="awTabGo(\'users\')"><div class="n">214</div><div class="l">users in acme</div></div><div class="aw-stat" onclick="awTabGo(\'orgs\')"><div class="n">3</div><div class="l">teams</div></div><div class="aw-stat"><div class="n">18</div><div class="l">invited</div></div></div>'
+ + '<div class="aw-kpi" style="margin-top:8px"><div class="aw-chart"><h5>7-day growth</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,28 20,24 35,18 50,20 65,12 80,14 100,4" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="4" r="2.5" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>+12% WoW</span><span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ok)">↗ trending</span></div></div><div class="aw-chart"><h5>by role</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48" style="flex-shrink:0"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="55 45" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-30" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--accent)"></i>admin 55%</span><span><i style="background:var(--ok)"></i>member 30%</span><span><i style="background:var(--line)"></i>invited 15%</span></div></div></div></div>'
+ + '<div class="aw-kpi" style="margin-top:8px"><div class="aw-chart"><h5>MFA coverage</h5><div style="display:flex;align-items:center;gap:8px"><div class="aw-bar-track" style="flex:1;height:8px"><div class="aw-bar-fill" style="width:87%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:11px;font-weight:600">87%</span></div><div class="aw-legend"><span><i style="background:var(--ok)"></i>enrolled</span><span><i style="background:var(--line)"></i>pending 13%</span></div></div><div class="aw-chart"><h5>SSO adoption</h5><div style="display:flex;align-items:center;gap:8px"><div class="aw-bar-track" style="flex:1;height:8px"><div class="aw-bar-fill" style="width:92%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:11px;font-weight:600">92%</span></div><div class="aw-legend"><span><i style="background:var(--accent)"></i>SSO users</span><span style="color:var(--faint);font-size:10px">OIDC preferred</span></div></div></div>'
+ + '<div class="aw-list" style="margin-top:8px"><div class="aw-row" style="background:var(--accent-soft)"><span class="aw-ico">AK</span><span><b>ak@acme</b>, admin</span><span class="bento-pill">you</span><time>now</time></div><div class="aw-row"><span class="aw-ico">MR</span><span>mira@acme, member</span><span class="aw-dot ok"></span><time>2m</time></div><div class="aw-row"><span class="aw-ico">JL</span><span>jin@acme, invited</span><span class="aw-dot amber"></span><time>1h</time></div><div class="aw-row"><span class="aw-ico">SA</span><span>sam@acme, member</span><span class="aw-dot ok"></span><time>3h</time></div><div class="aw-row"><span class="aw-ico">PR</span><span>priya@acme, admin</span><span class="aw-dot ok"></span><time>5h</time></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>provisioning · SCIM</h5><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim)"><span style="width:78px">SCIM sync</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:92%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">synced</span></div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim);margin-top:6px"><span style="width:78px">Invites pending</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:32%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">18</span></div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim);margin-top:6px"><span style="width:78px">MFA pending</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:18%;background:var(--dep-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">11</span></div></div>'
+ },
+ sessions: { h:'Sessions', meta:'3 active', body:
+ '<div class="aw-stat-grid"><div class="aw-stat"><div class="n">47</div><div class="l">active now</div></div><div class="aw-stat"><div class="n">1.2k</div><div class="l">24h logins</div></div><div class="aw-stat"><div class="n">99.98%</div><div class="l">success</div></div></div>'
+ + '<div class="aw-kpi" style="margin-top:8px"><div class="aw-chart"><h5>active, 24h</h5><svg viewBox="0 0 100 36" width="100%" height="36"><rect x="2" y="18" width="12" height="10" rx="2" fill="var(--accent)"/><rect x="18" y="14" width="12" height="14" rx="2" fill="var(--accent)"/><rect x="34" y="8" width="12" height="20" rx="2" fill="var(--accent)"/><rect x="50" y="12" width="12" height="16" rx="2" fill="var(--accent)"/><rect x="66" y="20" width="12" height="8" rx="2" fill="var(--line)"/><rect x="82" y="16" width="12" height="12" rx="2" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>active</span><span><i style="background:var(--line)"></i>revoked</span><span style="margin-left:auto;color:var(--ok)">▲ +8%</span></div></div><div class="aw-chart"><h5>by device · OS</h5><div style="margin-top:2px"><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)"><span>macOS</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:62%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">62%</span></div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:6px"><span>iOS</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:28%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">28%</span></div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:6px"><span>Windows</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:10%;background:var(--line)"></div></div><span style="font-family:var(--mono);font-size:10px">10%</span></div></div></div></div>'
+ + '<div class="aw-kpi" style="margin-top:8px"><div class="aw-chart"><h5>token age</h5><div style="display:flex;gap:4px;align-items:end;height:36px"><div style="flex:1;background:var(--accent);border-radius:4px 4px 0 0;height:40%"></div><div style="flex:1;background:var(--accent);border-radius:4px 4px 0 0;height:70%"></div><div style="flex:1;background:var(--ok);border-radius:4px 4px 0 0;height:100%"></div><div style="flex:1;background:var(--line);border-radius:4px 4px 0 0;height:25%"></div></div><div class="aw-legend" style="margin-top:6px"><span><i style="background:var(--accent)"></i>&lt;15m</span><span><i style="background:var(--ok)"></i>15m-1h</span><span><i style="background:var(--line)"></i>1h+</span></div></div><div class="aw-chart"><h5>risk, last hour</h5><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><span class="aw-dot ok"></span><span style="font-size:11px;color:var(--dim)">low</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:14%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">2 flagged</span></div><div style="display:flex;gap:6px;margin-top:8px"><span class="bento-pill">step-up 1</span><span class="bento-pill" style="background:var(--ok-bg);color:var(--ok)">trusted 46</span></div></div></div>'
+ + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>mbp-04</code><span>macOS · SF, Chrome</span><time>now</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>iphone-12</code><span>iOS · SF, Safari</span><time>12m</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>desk-billing</code><span>Windows · NYC, Edge</span><time>44m</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>stolen-laptop</code><span>revoked · blocked</span><time>1h</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>ipad-3</code><span>iPadOS · LDN</span><time>3h</time></div></div>'
+ },
+ audit: { h:'Audit log', meta:'immutable · 1.2k today', body:
+ '<div class="aw-chart"><h5>events / hour, today</h5><svg viewBox="0 0 100 40" width="100%" height="40"><rect x="6" y="24" width="10" height="12" rx="2" fill="var(--accent)"/><rect x="22" y="18" width="10" height="18" rx="2" fill="var(--accent)"/><rect x="38" y="10" width="10" height="26" rx="2" fill="var(--ok)"/><rect x="54" y="20" width="10" height="16" rx="2" fill="var(--beta-ink)"/><rect x="70" y="14" width="10" height="22" rx="2" fill="var(--accent)"/><rect x="86" y="26" width="8" height="10" rx="2" fill="var(--line)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>login</span><span><i style="background:var(--ok)"></i>token</span><span><i style="background:var(--beta-ink)"></i>mfa</span></div></div>'
+ + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>oidc.login</code><span>ak@acme · SSO</span><time>2s</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>token.rotated</code><span>mbp-04 · atomic</span><time>41s</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>mfa.step_up</code><span>mira@ · billing:refund</span><time>3m</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>scim.sync</code><span>214 users · ok</span><time>9m</time></div><div class="aw-row"><span class="aw-dot dep"></span><code>role.changed</code><span>jin → member</span><time>12m</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>user.invited</code><span>sam@acme</span><time>14m</time></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>selected, mfa.step_up</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">actor</span> mira@acme <span style="color:var(--faint)">· IP</span> 203.0.113.42 <span style="color:var(--faint)">· device</span> mbp-04</div><div><span style="color:var(--faint)">policy</span> enforce_mfa(billing:*) <span style="color:var(--ok)">● enforced</span><span style="margin-left:8px;color:var(--faint)">latency</span> 41ms</div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">immutable</span><span class="bento-pill" style="background:var(--ok-bg);color:var(--ok)">verified</span><span class="bento-pill" style="background:var(--surface);color:var(--dim)">export →</span></div></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>retention</h5><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim)"><span>7 years</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:100%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--ok)">compliant</span></div></div>'
+ },
+ tokens: { h:'Tokens', meta:'JWT · rotation on', body:
+ '<div class="aw-kpi"><div class="aw-chart"><h5>issuance, 24h</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,30 18,26 34,22 52,18 68,10 84,12 100,6" stroke="var(--ok)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="6" r="2.5" fill="var(--ok)"/></svg><div class="aw-legend"><span><i style="background:var(--ok)"></i>1.2k / h</span><span style="margin-left:auto;color:var(--ok)">▲ +4%</span></div></div><div class="aw-chart"><h5>by type</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="65 35" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-40" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--ok)"></i>access 65%</span><span><i style="background:var(--accent)"></i>refresh 22%</span><span><i style="background:var(--line)"></i>ID 13%</span></div></div></div></div>'
+ + '<div class="aw-json" style="margin-top:8px">{\n "sub": "ak@acme",\n "roles": ["admin"],\n "permissions": ["billing:refund"]\n}</div>'
+ + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><code>access</code><span>15m · HS256</span><span class="aw-dot ok"></span><time>rotates</time></div><div class="aw-row"><code>refresh</code><span>30d · rotation</span><span class="aw-dot ok"></span><time>revocable</time></div><div class="aw-row"><code>ID</code><span>1h · OIDC</span><time>cached</time></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>inspect, ak@acme</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">exp</span> 15m <span style="color:var(--ok)">● valid</span><span style="margin-left:8px;color:var(--faint)">alg</span> HS256 <span style="margin-left:8px;color:var(--faint)">kid</span> 2026-09</div><div><span style="color:var(--faint)">rotation</span> atomic <span style="color:var(--faint)">· replay window</span> 10s</div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">copy token</span><span class="bento-pill">decode</span><span class="bento-pill" style="background:var(--dep-bg);color:var(--dep-ink)">revoke</span></div></div></div>'
+ },
+ orgs: { h:'Orgs', meta:'acme · 3 teams', body:
+ '<div class="aw-stat-grid"><div class="aw-stat"><div class="n">58</div><div class="l">total members</div></div><div class="aw-stat"><div class="n">12</div><div class="l">admins</div></div><div class="aw-stat"><div class="n">2</div><div class="l">pending invites</div></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>users per team</h5><div style="display:flex;flex-direction:column;gap:6px;margin-top:4px"><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">eng</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:68%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">38</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">billing</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:22%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">8</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">platform</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:30%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">12</span></div></div></div>'
+ + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><span><b>acme</b>, root</span><span class="bento-pill">Enterprise</span><time>58 users</time></div><div class="aw-row" style="padding-left:24px"><span>↳ platform</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">12 users · SAML</span><span class="aw-dot ok"></span></div><div class="aw-row" style="padding-left:24px"><span>↳ billing</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">8 users · OIDC</span><span class="aw-dot ok"></span></div><div class="aw-row" style="padding-left:24px"><span>↳ eng</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">38 users · SCIM</span><span class="aw-dot ok"></span></div></div>'
+ + '<div class="aw-chart" style="margin-top:8px"><h5>delegated admin</h5><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim)"><span>platform leads can invite</span><span class="bento-pill" style="background:var(--ok-bg);color:var(--ok)">enabled</span><span style="margin-left:auto;color:var(--faint);font-size:10px;font-family:var(--mono)">policy: self-service</span></div></div>'
+ }
 };
-var awIcons = {users:'M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',sessions:'M16 14a2 2 0 012-2h2a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6a2 2 0 012-2h2M12 7a4 4 0 100-4 4 4 0 100 4z',audit:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-2-2h-2V8zM9 16v-2h6v2M9 12v-2h6v2',tokens:'M12 2l7 4v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4zM9 12l2 2 4-4',orgs:'M3 7l9-2 9-2-9-2-9 2zm0 5l9-2 9 2-9 2-9-2zm0 5.5l9 2 9-2'};
+var awIcons = {users:'M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',sessions:'M12 8a4 4 0 100 8 4 4 0 000 8zM8 14a2 2 0 00-2 2v4a2 2 0 002 2h8a2 2 0 002-2v-4a2 2 0 00-2-2zM9 10h6M9 18h6',audit:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-2-2h-2V8zM9 16v-2h6v2M9 12v-2h6v2',tokens:'M15 7a4 4 0 00-3.5 2.1M9 12l2 2 4-4M12 2l7 4v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z',orgs:'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'};
 function awRender(){
-  var side = document.getElementById('awSide');
-  if(side) side.innerHTML = Object.keys(awData).map(function(k){
-    return '<div class="aw-tab' + (k===awTab?' active':'') + '" role="tab" aria-selected="' + (k===awTab) + '" tabindex="0" onclick="awTabGo(\''+k+'\')"><svg viewBox="0 0 24 24" fill="none"><path d="' + (awIcons[k]||'') + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + k.charAt(0).toUpperCase()+k.slice(1) + '</span></div>';
-  }).join('');
-  var main = document.getElementById('awMain');
-  if(!main) return;
-  var d = awData[awTab];
-  main.innerHTML = '<div class="aw-main-head"><h4>' + d.h + '</h4><span class="muted">' + d.meta + '</span></div>' + d.body;
+ var side = document.getElementById('awSide');
+ if(side) side.innerHTML = Object.keys(awData).map(function(k){
+ return '<div class="aw-tab' + (k===awTab?' active':'') + '" role="tab" aria-selected="' + (k===awTab) + '" tabindex="0" onclick="awTabGo(\''+k+'\')"><svg viewBox="0 0 24 24" fill="none"><path d="' + (awIcons[k]||'') + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + k.charAt(0).toUpperCase()+k.slice(1) + '</span></div>';
+ }).join('');
+ var main = document.getElementById('awMain');
+ if(!main) return;
+ var d = awData[awTab];
+ main.innerHTML = '<div class="aw-main-head"><h4>' + d.h + '</h4><span class="muted">' + d.meta + '</span></div>' + d.body;
 }
 function awTabGo(k){ awTab = k; awRender(); }
 
@@ -463,18 +515,18 @@ lpFeature('auth');
 awRender();
 initTheme();
 document.addEventListener('keydown', function(e){
-  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.home-card,.bento-card')){
-    e.preventDefault();
-    e.target.click();
-  }
-  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.aw-tab')){
-    e.preventDefault();
-    e.target.click();
-  }
-  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.bento-mini-row')){
-    e.preventDefault();
-    e.target.closest('.bento-card').click();
-  }
+ if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.home-card,.bento-card')){
+ e.preventDefault();
+ e.target.click();
+ }
+ if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.aw-tab')){
+ e.preventDefault();
+ e.target.click();
+ }
+ if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.bento-mini-row')){
+ e.preventDefault();
+ e.target.closest('.bento-card').click();
+ }
 });
 </script>
 </body>
