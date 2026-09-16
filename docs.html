@@ -170,7 +170,7 @@ ul.bul li{margin:3px 0}
 .pill{font-family:var(--mono);font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px;height:fit-content;flex-shrink:0;white-space:nowrap}
 .pill.gray{color:var(--dim);background:var(--raised)}
 .pill.amber{color:var(--beta-ink);background:var(--beta-bg)}
-.callout{border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:8px;padding:9px 12px;background:var(--surface);font-size:13px;color:var(--dim)}
+.callout{border:1px solid var(--line);border-radius:8px;padding:9px 12px;background:var(--surface);font-size:13px;color:var(--dim)}
 .release{border-left:2px solid var(--line);padding-left:14px;margin-bottom:16px;position:relative}
 .release-dot{position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .release-ver{font-family:var(--mono);font-weight:600;font-size:13px}
@@ -205,13 +205,9 @@ ul.bul li{margin:3px 0}
 .toast{display:flex;align-items:flex-start;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.12);padding:12px 14px;font-size:13px;color:var(--dim);animation:toast-in .16s ease-out}
 .toast .t-ico{flex-shrink:0;margin-top:1px}
 .toast .t-ico svg{width:15px;height:15px}
-.toast-info{border-left:2px solid var(--accent)}
 .toast-info .t-ico{color:var(--accent)}
-.toast-success{border-left:2px solid var(--ok)}
 .toast-success .t-ico{color:var(--ok)}
-.toast-warning{border-left:2px solid var(--beta-ink)}
 .toast-warning .t-ico{color:var(--beta-ink)}
-.toast-error{border-left:2px solid var(--dep-ink)}
 .toast-error .t-ico{color:var(--dep-ink)}
 .toast .msg{flex:1}
 .toast .x{color:var(--faint);cursor:pointer;font-size:14px;line-height:1;background:none;border:0;padding:0;font-family:var(--sans)}
@@ -958,7 +954,7 @@ function getSiblings(node){
 }
 
 function bodyForNode(node){
-  let h = (node.status === S_DEP ? `<div class="callout" style="border-left-color:var(--dep-ink)"><b>Deprecated.</b> <span class="muted">SMS Fallback is deprecated — migrate to <a class="link" onclick="selectPage('auth-mfa-webauthn')">WebAuthn / Passkeys</a>. It remains available per-org until the sunset date in the <a class="link" onclick="selectPage('rel-mgmt-deprecation')">deprecation policy</a>.</span></div>` : '')
+  let h = (node.status === S_DEP ? `<div class="callout warn"><b>Deprecated.</b> <span class="muted">SMS Fallback is deprecated — migrate to <a class="link" onclick="selectPage('auth-mfa-webauthn')">WebAuthn / Passkeys</a>. It remains available per-org until the sunset date in the <a class="link" onclick="selectPage('rel-mgmt-deprecation')">deprecation policy</a>.</span></div>` : '')
     + `<section class="sec" id="sec-overview"><h2 class="sec-title">Overview</h2><p>${node.desc || ('Reference for <b>'+node.title+'</b>.')}</p>`
     + `<p class="muted">Part of <b>${node.parents[0] || node.title}</b>${node.parents[1] ? ' → <b>'+node.parents[1]+'</b>' : ''}. Start in sandbox, verify the happy path, then tighten policy in staging before production.</p></section>`;
   if(node.children){

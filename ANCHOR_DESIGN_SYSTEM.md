@@ -88,8 +88,7 @@ Body `13px/1.5`; hero `24px/600`; page title `20px/600`; section `13.5–14px/60
 
 - Base unit `4px`; container `1080px` landing / fluid article docs.
 - Radius `4 → 6 → 8 → 10 → 12px` (pills → dialogs); `20px` rating pills; `999px` toggles/avatars.
-- Shadows card/menu/overlay + `rgba(0,0,0,.35)` scrim (decorative).
-- Motion `100/160/240ms`; honor `prefers-reduced-motion`.
+- Borders `1px line`, inner `1px line-soft`. Rounded components use uniform borders — no 2px left accent.
 
 ### 2.5 Iconography
 

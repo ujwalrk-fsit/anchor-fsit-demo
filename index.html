@@ -68,32 +68,68 @@ svg{display:block}
 
 .lp-wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-/* ---- hero (two-column: copy + mock dashboard) ---- */
-.lp-hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:28px;align-items:center;padding:40px 0 28px}
-@media(max-width:860px){.lp-hero-grid{grid-template-columns:1fr}}
+/* ---- hero (centered copy + full-width dashboard) ---- */
+.lp-hero-grid{display:flex;flex-direction:column;align-items:center;gap:28px;padding:40px 0 28px}
+.lp-hero{max-width:640px;text-align:center;display:flex;flex-direction:column;align-items:center}
 .lp-hero h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px;line-height:1.25}
 .lp-hero p{color:var(--dim);font-size:13.5px;margin:0}
-.lp-hero .cta-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.lp-hero .cta-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
 .lp-kicker{font-family:var(--mono);font-size:10px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px;display:inline-block;margin-bottom:10px}
+.aw{width:100%;max-width:1040px}
 
-/* ---- mock dashboard (static UI mock) ---- */
-.dash{border:1px solid var(--line);border-radius:10px;background:var(--bg);box-shadow:0 16px 40px rgba(16,24,40,.10);overflow:hidden}
-.dash-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--line);flex-shrink:0}
-.dash-title{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dash-pill{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ok);background:var(--ok-bg);border-radius:4px;padding:1px 6px;white-space:nowrap}
-.dash-body{padding:12px}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
-.stat .n{font-size:15px;font-weight:600;letter-spacing:-.01em}
-.stat .l{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:2px}
-.act{border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.act-row{display:flex;align-items:center;gap:8px;padding:6px 10px;font-size:12px;color:var(--dim);border-top:1px solid var(--line-soft)}
-.act-row:first-child{border-top:0}
-.act-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);flex-shrink:0}
-.act-dot.amber{background:var(--beta-ink)}
-.act-row code{font-family:var(--mono);font-size:11px;color:var(--ink)}
-.act-row time{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--faint);white-space:nowrap}
+/* ---- hero dashboard window (Cursor-style interactive) ---- */
+.aw{border:1px solid var(--line);border-radius:10px;background:var(--bg);box-shadow:0 16px 40px rgba(16,24,40,.10);overflow:hidden}
+.aw-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
+.aw-title{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aw-pill{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ok);background:var(--ok-bg);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.aw-wrap{display:grid;grid-template-columns:156px 1fr;height:520px}
+@media(max-width:560px){.aw-wrap{grid-template-columns:1fr;height:auto;min-height:420px}}
+.aw-side{border-right:1px solid var(--line);background:var(--surface);padding:6px}
+@media(max-width:560px){.aw-side{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:6px 8px}}
+.aw-tab{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;font-size:12px;color:var(--dim);cursor:pointer;white-space:nowrap}
+.aw-tab:hover{background:var(--raised);color:var(--ink)}
+.aw-tab.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:500}
+@media(max-width:560px){.aw-tab{padding:6px 10px}}
+.aw-tab svg{width:14px;height:14px;flex-shrink:0;color:var(--faint)}
+.aw-tab.active svg{color:var(--accent)}
+.aw-main{padding:10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) transparent}
+.aw-main-head{display:flex;align-items:center;gap:8px}
+.aw-main-head h4{font-size:12.5px;font-weight:600;margin:0}
+.aw-main-head .muted{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-left:auto}
+.aw-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.aw-stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);cursor:pointer}
+.aw-stat:hover{border-color:var(--accent)}
+.aw-stat .n{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.aw-stat .l{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:2px}
+.aw-kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aw-chart{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);overflow:hidden}
+.aw-chart h5{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 6px}
+.aw-bar-track{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
+.aw-bar-fill{height:100%;border-radius:999px}
+.aw-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.aw-legend span{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;align-items:center;gap:4px}
+.aw-legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.aw-chat{border:1px solid var(--line);border-radius:8px;background:var(--bg);overflow:hidden}
+.aw-chat-head{font-family:var(--mono);font-size:10px;color:var(--faint);padding:6px 8px;border-bottom:1px solid var(--line-soft);background:var(--surface)}
+.aw-chat-body{padding:8px;display:flex;flex-direction:column;gap:6px}
+.aw-msg{font-size:11.5px;line-height:1.45;padding:6px 8px;border-radius:8px;max-width:88%}
+.aw-msg.user{align-self:flex-end;background:var(--accent);color:#fff}
+.aw-msg.assistant{align-self:flex-start;background:var(--surface);border:1px solid var(--line);color:var(--dim)}
+.aw-msg .who{font-family:var(--mono);font-size:9px;color:var(--faint);margin-bottom:2px}
+.aw-spark{width:100%;height:36px;display:block}
+.aw-list{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.aw-row{display:flex;align-items:center;gap:8px;padding:7px 10px;font-size:12px;color:var(--dim);border-top:1px solid var(--line-soft)}
+.aw-row:first-child{border-top:0}
+.aw-row:hover{background:var(--surface)}
+.aw-row code{font-family:var(--mono);font-size:11px;color:var(--ink)}
+.aw-row time{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--faint);white-space:nowrap}
+.aw-ico{width:18px;height:18px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:10px;color:var(--dim)}
+.aw-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.aw-dot.ok{background:var(--ok)}
+.aw-dot.amber{background:var(--beta-ink)}
+.aw-dot.dep{background:var(--dep-ink)}
+.aw-empty{border:1px dashed var(--line);border-radius:8px;padding:16px;text-align:center;color:var(--faint);font-size:12.5px;background:var(--surface)}
+.aw-json{font-family:var(--mono);font-size:11px;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;color:var(--ink)}
 
 /* ---- sections ---- */
 .lp-sec{padding:28px 0;border-top:1px solid var(--line-soft)}
@@ -125,15 +161,25 @@ svg{display:block}
 .win-body .code-panel{border:0;border-radius:0}
 .win-body .code-panel pre{min-height:150px}
 
-/* ---- feature grid (reuse home-card, plus hover lift) ---- */
-.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-@media(max-width:900px){.home-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.home-grid{grid-template-columns:1fr}}
-.home-card{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);cursor:pointer}
-.home-card:hover{border-color:var(--accent)}
-.home-card svg{width:18px;height:18px;color:var(--accent);margin-bottom:6px}
-.home-card .t{font-size:13px;font-weight:600;margin-bottom:2px}
-.home-card .d{font-size:11.5px;color:var(--dim);line-height:1.45}
+/* ---- feature grid → bento (Notion-minimal) ---- */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bento-card{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);cursor:pointer;display:flex;flex-direction:column;gap:8px}
+.bento-card:hover{border-color:var(--accent)}
+.bento-card.wide{grid-column:span 2}
+.bento-card.tall{grid-row:span 2}
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bento-card.tall{grid-row:auto}.bento-card.wide{grid-column:span 2}}
+@media(max-width:560px){.bento{grid-template-columns:1fr}.bento-card.wide{grid-column:auto}.bento-card.tall{grid-row:auto}}
+.bento-card svg.b-ico{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+.bento-card .t{font-size:13px;font-weight:600}
+.bento-card .d{font-size:11.5px;color:var(--dim);line-height:1.45}
+.bento-mini{margin-top:auto;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.bento-mini-row{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:11.5px;color:var(--dim);border-top:1px solid var(--line-soft)}
+.bento-mini-row:first-child{border-top:0}
+.bento-mini-row:hover{background:var(--bg)}
+.bento-mini-row code{font-family:var(--mono);font-size:11px;color:var(--ink)}
+.bento-mini-row .l{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.bento-mini-row .r{margin-left:auto;display:flex;align-items:center;gap:6px}
+.bento-pill{font-family:var(--mono);font-size:10px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
 
 /* ---- footer (same markup as docs) ---- */
 .footer{border-top:1px solid var(--line);background:var(--bg);padding:28px 0 20px;font-size:12px;color:var(--dim)}
@@ -185,24 +231,15 @@ svg{display:block}
         <a class="btn" href="docs.html">Add login in 15 minutes</a>
       </div>
     </div>
-    <div class="dash" aria-hidden="true">
-      <div class="dash-bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dash-title">anchor console — acme</span>
-        <span class="dash-pill">● operational</span>
+    <div class="aw" id="aw">
+      <div class="aw-bar">
+        <span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span><span class="dot" style="width:9px;height:9px;border-radius:50%;background:var(--line)"></span>
+        <span class="aw-title">Anchor — acme</span>
+        <span class="aw-pill">● operational</span>
       </div>
-      <div class="dash-body">
-        <div class="stat-grid">
-          <div class="stat"><div class="n">48.2k</div><div class="l">monthly users</div></div>
-          <div class="stat"><div class="n">99.98%</div><div class="l">login success</div></div>
-          <div class="stat"><div class="n">87%</div><div class="l">MFA enrolled</div></div>
-        </div>
-        <div class="act">
-          <div class="act-row"><span class="act-dot"></span><code>oidc.login</code><span>cross-app SSO</span><time>2s ago</time></div>
-          <div class="act-row"><span class="act-dot"></span><code>token.rotated</code><span>device mbp-04</span><time>41s ago</time></div>
-          <div class="act-row"><span class="act-dot amber"></span><code>mfa.step_up</code><span>billing:refund</span><time>3m ago</time></div>
-          <div class="act-row"><span class="act-dot"></span><code>scim.sync</code><span>214 users</span><time>9m ago</time></div>
-        </div>
+      <div class="aw-wrap">
+        <nav class="aw-side" id="awSide" aria-label="Anchor console"></nav>
+        <div class="aw-main" id="awMain"></div>
       </div>
     </div>
   </section>
@@ -255,7 +292,7 @@ svg{display:block}
   <section class="lp-sec">
     <h2>Everything around the token</h2>
     <p class="sub">Six pillars, one platform team, per-pillar SLA commitments.</p>
-    <div class="home-grid lp-grid" id="lpGrid"></div>
+    <div class="bento" id="lpGrid"></div>
   </section>
 </div>
 
@@ -362,24 +399,81 @@ function lpFeature(key){
 }
 
 var lpCards = [
-  { t: 'Authentication', d: 'Login, SSO, MFA, sessions, and token handling.', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v2' },
-  { t: 'User Management', d: 'Accounts, orgs, tenancy, and provisioning.', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
-  { t: 'Roles & Access Control', d: 'Roles, permissions, policy engine, audit trail.', icon: 'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4' },
-  { t: 'Compliance & Security', d: 'Certifications, encryption, data governance.', icon: 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z' },
-  { t: 'Integrations', d: 'Connector framework, federation, KYC, social login.', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
-  { t: 'Clients & SDKs', d: 'Web, mobile, backend, and CLI libraries.', icon: 'M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14' }
+  { t: 'Authentication', d: 'Login, SSO, MFA, sessions, and token handling.', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v2', span:'wide',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>hosted login</code><span class="bento-pill">redirect</span><span class="r"><span class="l">PKCE</span></span></div><div class="bento-mini-row"><code>oidc.login</code><span>cross-app SSO</span><span class="r"><span class="l">2s ago</span></span></div></div>' },
+  { t: 'User Management', d: 'Accounts, orgs, tenancy, and provisioning.', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75', span:'tall',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-ico">AK</span><span>ak@acme</span><span class="r"><code>admin</code></span></div><div class="bento-mini-row"><span class="aw-ico">MR</span><span>mira@acme</span><span class="r"><code>member</code></span></div><div class="bento-mini-row"><span class="aw-ico">JL</span><span>jin@acme</span><span class="r"><span class="l">invited</span></span></div><div class="bento-mini-row" style="border-top:1px dashed var(--line)"><span class="aw-dot ok"></span><span>SCIM synced</span><span class="r"><span class="l">214 users</span></span></div><div class="bento-mini-row"><span class="aw-dot amber"></span><span>Pending review</span><span class="r"><span class="l">18</span></span></div></div>' },
+  { t: 'Roles & Access Control', d: 'Roles, permissions, policy engine, audit trail.', icon: 'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4', span:'',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>billing:refund</code><span class="r"><span class="aw-dot ok"></span><span class="l">in token</span></span></div><div class="bento-mini-row"><code>audit.role_changed</code><span class="r"><span class="l">immutable</span></span></div></div>' },
+  { t: 'Compliance & Security', d: 'Certifications, encryption, data governance.', icon: 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z', span:'',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><span class="aw-dot ok"></span><span>SOC 2 Type II</span><span class="r"><span class="l">tracked</span></span></div><div class="bento-mini-row"><span class="aw-dot ok"></span><span>GDPR + DPDP</span><span class="r"><span class="l">masked</span></span></div></div>' },
+  { t: 'Integrations', d: 'Connector framework, federation, KYC, social login.', icon: 'M13 10V3L4 14h7v7l9-11h-7z', span:'wide',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>SAML</code><span class="bento-pill">brokered</span><code>OIDC</code><span class="r l">Persona</span></div><div class="bento-mini-row"><code>Google</code><code>GitHub</code><code>Microsoft</code><span class="r l">social</span></div></div>' },
+  { t: 'Clients & SDKs', d: 'Web, mobile, backend, and CLI libraries.', icon: 'M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14', span:'',
+    mini:'<div class="bento-mini"><div class="bento-mini-row"><code>@anchor/web</code><span class="r l">JS/React</span></div><div class="bento-mini-row"><code>anchor.verify()</code><span class="r l">Node/Python</span></div></div>' }
 ];
 document.getElementById('lpGrid').innerHTML = lpCards.map(function(c){
-  return '<div class="home-card" tabindex="0" onclick="location.href=\'docs.html\'"><svg viewBox="0 0 24 24" fill="none"><path d="' + c.icon + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">' + c.t + '</div><div class="d">' + c.d + '</div></div>';
+  return '<div class="bento-card ' + c.span + '" tabindex="0" role="link" aria-label="' + c.t + '" onclick="location.href=\'docs.html\'"><svg class="b-ico" viewBox="0 0 24 24" fill="none"><path d="' + c.icon + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">' + c.t + '</div><div class="d">' + c.d + '</div>' + c.mini + '</div>';
 }).join('');
+
+// ---- interactive hero window (namespaced: awTab, awData) ----
+var awTab = 'users';
+var awData = {
+  users: { h:'Users', meta:'214 in acme', body:
+    '<div class="aw-stat-grid"><div class="aw-stat" onclick="awTabGo(\'users\')"><div class="n">214</div><div class="l">users in acme</div></div><div class="aw-stat" onclick="awTabGo(\'orgs\')"><div class="n">3</div><div class="l">teams</div></div><div class="aw-stat"><div class="n">18</div><div class="l">invited</div></div></div>'
+    + '<div class="aw-kpi"><div class="aw-chart"><h5>7-day growth</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,28 20,24 35,18 50,20 65,12 80,14 100,4" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="4" r="2.5" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>+12% WoW</span></div></div><div class="aw-chart"><h5>by role</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48" style="flex-shrink:0"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="55 45" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-30" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--accent)"></i>admin 55%</span><span><i style="background:var(--ok)"></i>member 30%</span><span><i style="background:var(--line)"></i>invited 15%</span></div></div></div></div>'
+    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-ico">AK</span><span><b>ak@acme</b> — admin</span><span class="aw-dot ok"></span><time>now</time></div><div class="aw-row"><span class="aw-ico">MR</span><span>mira@acme — member</span><time>2m</time></div><div class="aw-row"><span class="aw-ico">JL</span><span>jin@acme — invited</span><span class="aw-dot amber"></span><time>1h</time></div></div>'
+    + '<div class="aw-chart" style="margin-top:8px"><h5>provisioning</h5><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim)"><span>SCIM sync</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:92%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">synced</span></div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim);margin-top:6px"><span>Invites pending</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:32%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">18</span></div></div>'
+  },
+  sessions: { h:'Sessions', meta:'3 active', body:
+    '<div class="aw-kpi"><div class="aw-chart"><h5>active — 24h</h5><svg viewBox="0 0 100 36" width="100%" height="36"><rect x="2" y="18" width="12" height="10" rx="2" fill="var(--accent)"/><rect x="18" y="14" width="12" height="14" rx="2" fill="var(--accent)"/><rect x="34" y="8" width="12" height="20" rx="2" fill="var(--accent)"/><rect x="50" y="12" width="12" height="16" rx="2" fill="var(--accent)"/><rect x="66" y="20" width="12" height="8" rx="2" fill="var(--line)"/><rect x="82" y="16" width="12" height="12" rx="2" fill="var(--accent)"/></svg><div class="aw-legend"><span><i style="background:var(--accent)"></i>active</span><span><i style="background:var(--line)"></i>revoked</span></div></div><div class="aw-chart"><h5>by device</h5><div style="margin-top:2px"><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)"><span>macOS</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:62%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">62%</span></div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-top:6px"><span>iOS &nbsp;&nbsp;&nbsp;</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:28%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">28%</span></div></div></div></div>'
+    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>mbp-04</code><span>macOS · SF</span><time>now</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>iphone-12</code><span>iOS · SF</span><time>12m</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>stolen-laptop</code><span>revoked</span><time>1h</time></div></div>'
+  },
+  audit: { h:'Audit log', meta:'immutable', body:
+    '<div class="aw-chart"><h5>events / hour — today</h5><svg viewBox="0 0 100 40" width="100%" height="40"><rect x="6" y="24" width="10" height="12" rx="2" fill="var(--accent)"/><rect x="22" y="18" width="10" height="18" rx="2" fill="var(--accent)"/><rect x="38" y="10" width="10" height="26" rx="2" fill="var(--ok)"/><rect x="54" y="20" width="10" height="16" rx="2" fill="var(--beta-ink)"/><rect x="70" y="14" width="10" height="22" rx="2" fill="var(--accent)"/><rect x="86" y="26" width="8" height="10" rx="2" fill="var(--line)"/></svg></div>'
+    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><code>oidc.login</code><span>cross-app SSO</span><time>2s</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>token.rotated</code><span>device mbp-04</span><time>41s</time></div><div class="aw-row"><span class="aw-dot amber"></span><code>mfa.step_up</code><span>billing:refund</span><time>3m</time></div><div class="aw-row"><span class="aw-dot ok"></span><code>scim.sync</code><span>214 users</span><time>9m</time></div></div>'
+    + '<div class="aw-chart" style="margin-top:8px"><h5>selected event — mfa.step_up</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">actor</span> mira@acme <span style="color:var(--faint)">· IP</span> 203.0.113.42</div><div><span style="color:var(--faint)">policy</span> enforce_mfa(billing:*) <span style="color:var(--ok)">● enforced</span></div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">immutable</span><span class="bento-pill" style="background:var(--ok-bg);color:var(--ok)">verified</span></div></div></div>'
+  },
+  tokens: { h:'Tokens', meta:'JWT', body:
+    '<div class="aw-kpi"><div class="aw-chart"><h5>issuance — 24h</h5><svg class="aw-spark" viewBox="0 0 100 36" fill="none"><polyline points="0,30 18,26 34,22 52,18 68,10 84,12 100,6" stroke="var(--ok)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="100" cy="6" r="2.5" fill="var(--ok)"/></svg><div class="aw-legend"><span><i style="background:var(--ok)"></i>1.2k / h</span></div></div><div class="aw-chart"><h5>by type</h5><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 36" width="48" height="48"><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--line)" stroke-width="4"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--ok)" stroke-width="4" stroke-dasharray="65 35" stroke-dashoffset="25" stroke-linecap="round"/><circle r="15.9" cx="18" cy="18" fill="transparent" stroke="var(--accent)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-40" stroke-linecap="round"/></svg><div class="aw-legend" style="flex-direction:column"><span><i style="background:var(--ok)"></i>access 65%</span><span><i style="background:var(--accent)"></i>refresh 22%</span><span><i style="background:var(--line)"></i>ID 13%</span></div></div></div></div>'
+    + '<div class="aw-json" style="margin-top:8px">{\n  "sub": "ak@acme",\n  "roles": ["admin"],\n  "permissions": ["billing:refund"]\n}</div>'
+    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><code>access</code><span>15m</span><time>rotates</time></div><div class="aw-row"><code>refresh</code><span>30d</span><time>revocable</time></div></div>'
+    + '<div class="aw-chart" style="margin-top:8px"><h5>inspect — ak@acme</h5><div style="font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--dim)"><div><span style="color:var(--faint)">exp</span> 15m <span style="color:var(--ok)">● valid</span><span style="margin-left:8px;color:var(--faint)">rotation</span> atomic</div><div style="display:flex;gap:6px;margin-top:6px"><span class="bento-pill">copy token</span><span class="bento-pill" style="background:var(--dep-bg);color:var(--dep-ink)">revoke</span></div></div></div>'
+  },
+  orgs: { h:'Orgs', meta:'acme', body:
+    '<div class="aw-chart"><h5>users per team</h5><div style="display:flex;flex-direction:column;gap:6px;margin-top:4px"><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">eng</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:68%;background:var(--accent)"></div></div><span style="font-family:var(--mono);font-size:10px">38</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">billing</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:22%;background:var(--ok)"></div></div><span style="font-family:var(--mono);font-size:10px">8</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:58px;font-size:11px;color:var(--dim)">platform</span><div class="aw-bar-track" style="flex:1"><div class="aw-bar-fill" style="width:30%;background:var(--beta-ink)"></div></div><span style="font-family:var(--mono);font-size:10px">12</span></div></div></div>'
+    + '<div class="aw-list" style="margin-top:8px"><div class="aw-row"><span class="aw-dot ok"></span><span><b>acme</b> — root</span><time>3 teams</time></div><div class="aw-row" style="padding-left:24px"><span>↳ platform</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">12 users</span></div><div class="aw-row" style="padding-left:24px"><span>↳ billing</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">8 users</span></div><div class="aw-row" style="padding-left:24px"><span>↳ eng</span><span class="l" style="font-family:var(--mono);font-size:10px;color:var(--faint)">38 users</span></div></div>'
+  }
+};
+var awIcons = {users:'M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 100-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',sessions:'M16 14a2 2 0 012-2h2a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6a2 2 0 012-2h2M12 7a4 4 0 100-4 4 4 0 100 4z',audit:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-2-2h-2V8zM9 16v-2h6v2M9 12v-2h6v2',tokens:'M12 2l7 4v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4zM9 12l2 2 4-4',orgs:'M3 7l9-2 9-2-9-2-9 2zm0 5l9-2 9 2-9 2-9-2zm0 5.5l9 2 9-2'};
+function awRender(){
+  var side = document.getElementById('awSide');
+  if(side) side.innerHTML = Object.keys(awData).map(function(k){
+    return '<div class="aw-tab' + (k===awTab?' active':'') + '" role="tab" aria-selected="' + (k===awTab) + '" tabindex="0" onclick="awTabGo(\''+k+'\')"><svg viewBox="0 0 24 24" fill="none"><path d="' + (awIcons[k]||'') + '" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + k.charAt(0).toUpperCase()+k.slice(1) + '</span></div>';
+  }).join('');
+  var main = document.getElementById('awMain');
+  if(!main) return;
+  var d = awData[awTab];
+  main.innerHTML = '<div class="aw-main-head"><h4>' + d.h + '</h4><span class="muted">' + d.meta + '</span></div>' + d.body;
+}
+function awTabGo(k){ awTab = k; awRender(); }
 
 lpCodeTab('js');
 lpFeature('auth');
+awRender();
 initTheme();
 document.addEventListener('keydown', function(e){
-  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.home-card')){
+  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.home-card,.bento-card')){
     e.preventDefault();
     e.target.click();
+  }
+  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.aw-tab')){
+    e.preventDefault();
+    e.target.click();
+  }
+  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.bento-mini-row')){
+    e.preventDefault();
+    e.target.closest('.bento-card').click();
   }
 });
 </script>
