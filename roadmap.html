@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="shield-keyhole.svg" type="image/svg+xml" sizes="any">
+<script>try{var t=localStorage.getItem('anchor-theme');if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<title>Anchor Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --ink:#1B1F27; --dim:#434C59; --faint:#646D7A;
+  --surface:#F7F8FA; --raised:#F0F2F5;
+  --line:#E3E6EB; --line-soft:#EDEFF2; --line-strong:#767E8C;
+  --input-border:#767E8C; --scroll-thumb:#878F9E;
+  --accent:#045E96; --accent-soft:#E6F1F7; --accent-ink:#034A78;
+  --brand:#045E96; --brand-ink:#034A78;
+  --beta-ink:#93610C; --beta-bg:#FFF4E3; --beta-line:#F2DDAF;
+  --dep-ink:#912018; --dep-bg:#FEF3F2; --dep-line:#FECDCA;
+  --ok:#1C7A52; --ok-bg:#E7F4ED; --error:#B42318;
+  --mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#14171C;
+  --ink:#F3F5F7; --dim:#AEB6C2; --faint:#7A8494;
+  --surface:#1B1F27; --raised:#232833;
+  --line:#2C323D; --line-soft:#262B35; --line-strong:#6B7585;
+  --input-border:#6B7585; --scroll-thumb:#6E7889;
+  --accent:#258AC6; --accent-soft:#0F2E42; --accent-ink:#8AC7EE;
+  --brand:#045E96; --brand-ink:#034A78;
+  --ok:#3FBE85; --ok-bg:#0F2A1E;
+  --beta-ink:#E0A63D; --beta-bg:#2E2410; --beta-line:#4A3A18;
+  --dep-ink:#F0776A; --dep-bg:#331512; --dep-line:#4F1F1B;
+  --error:#F0776A;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.hidden{display:none!important}
+.thin-scroll{scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) transparent}
+.thin-scroll::-webkit-scrollbar{width:4px;height:4px}
+.thin-scroll::-webkit-scrollbar-track{background:transparent}
+.thin-scroll::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:4px}
+svg{display:block}
+.topbar{height:40px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:8px;background:var(--bg);position:relative;z-index:30}
+.brand{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;color:var(--ink);text-decoration:none}
+.brand svg{width:17px;height:17px;color:var(--brand);flex-shrink:0}
+.brand b{font-size:13px;font-weight:600}
+.brand-sub{font-family:var(--mono);font-size:10px;color:var(--faint);padding-left:8px;border-left:1px solid var(--line);white-space:nowrap}
+@media(max-width:760px){.brand-sub{display:none}}
+.spacer{flex:1}
+.ver-pill{font-family:var(--mono);font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:3px 7px;display:flex;align-items:center;gap:5px;background:var(--bg);height:28px;flex-shrink:0}
+.topnav{display:flex;gap:1px;flex-shrink:0}
+.topnav a{border:0;background:transparent;color:var(--dim);font-size:12px;padding:4px 8px;border-radius:6px;cursor:pointer;white-space:nowrap;font-family:var(--sans);text-decoration:none}
+.topnav a:hover{background:var(--surface);color:var(--ink)}
+.topnav a.active{background:var(--accent-soft);color:var(--accent-ink)}
+.icon-btn{display:flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--bg);color:var(--dim);font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer;font-family:var(--sans)}
+.icon-btn:hover{border-color:var(--accent);color:var(--ink)}
+.theme-btn{height:28px;width:28px;padding:0;justify-content:center}
+.theme-btn svg{width:14px;height:14px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.skip-link{position:absolute;left:8px;top:-48px;z-index:100;background:var(--brand);color:#fff;font-size:12.5px;padding:6px 12px;border-radius:6px;text-decoration:none}
+.skip-link:focus{top:6px;color:#fff}
+#content:focus{outline:none}
+.layout{display:grid;grid-template-columns:196px minmax(0,1fr) 188px;height:calc(100vh - 40px)}
+.sidebar{border-right:1px solid var(--line);background:var(--surface);overflow-y:auto;padding:8px 6px;font-size:12.5px}
+.side-home{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;margin-bottom:4px;color:var(--ink);text-decoration:none}
+.side-home:hover{background:var(--raised)}
+.nav-group{margin-bottom:1px}
+.nav-sum{list-style:none;display:flex;align-items:center;gap:5px;padding:3px 6px;border-radius:5px;cursor:pointer;user-select:none;color:var(--dim);font-weight:600;font-size:11.5px}
+.nav-sum::-webkit-details-marker{display:none}
+.nav-sum:hover{background:var(--raised);color:var(--ink)}
+.nav-sum .caret{width:8px;height:8px;flex-shrink:0;color:var(--faint)}
+.nav-children{margin:1px 0 3px 7px;padding-left:5px;border-left:1px solid var(--line)}
+.nav-leaf{display:flex;align-items:center;gap:5px;padding:4px 6px;border-radius:5px;font-size:12px;color:var(--dim);cursor:pointer}
+.nav-leaf:hover{background:var(--raised);color:var(--ink)}
+.nav-leaf.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:500}
+.trunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.main-scroll{overflow-y:auto;display:flex;flex-direction:column;min-height:0}
+.content{max-width:none;width:100%;flex:1 0 auto;padding:16px 20px 28px}
+.outline{border-left:1px solid var(--line);padding:14px 10px 20px 12px;overflow-y:auto;font-size:12px;background:var(--bg)}
+.outline h4{margin:0 0 6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);font-weight:600}
+.outline.empty{display:none}
+#outlineLinks a{display:block;padding:2px 0 2px 8px;border-left:2px solid transparent;color:var(--dim);text-decoration:none;font-size:12px;line-height:1.45;cursor:pointer}
+#outlineLinks a:hover{color:var(--ink)}
+#outlineLinks a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:500}
+@media(max-width:1080px){.layout{grid-template-columns:196px minmax(0,1fr)}.outline{display:none}}
+.crumb{font-family:var(--mono);font-size:11px;color:var(--faint);margin-bottom:6px}
+.crumb a{color:var(--accent);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.crumb .sep{margin:0 6px}
+.page-title{font-size:20px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.25}
+.page-desc{color:var(--dim);font-size:13px;margin:6px 0 8px;max-width:none}
+.sec{margin:14px 0;scroll-margin-top:56px}
+.sec-title{font-size:13.5px;font-weight:600;margin:0 0 6px;padding-top:2px}
+.sec p{margin:0 0 7px;color:var(--dim);font-size:13px}
+.sec p b{color:var(--ink)}
+.muted{color:var(--dim)}
+.link{color:var(--accent);cursor:pointer;text-decoration:none}
+.link:hover{text-decoration:underline}
+ul.bul{margin:6px 0 8px;padding-left:18px;color:var(--dim);font-size:13px}
+ul.bul li{margin:3px 0}
+.callout{border:1px solid var(--line);border-radius:8px;padding:9px 12px;background:var(--surface);font-size:13px;color:var(--dim);margin:8px 0}
+.callout.warn{border-color:var(--dep-line);background:var(--dep-bg);color:var(--dep-ink)}
+table.spec{width:100%;border-collapse:collapse;margin:8px 0;font-size:12.5px}
+table.spec th{text-align:left;font-size:11px;color:var(--dim);font-weight:600;background:var(--surface);padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.spec td{padding:6px 8px;border-bottom:1px solid var(--line-soft);color:var(--dim);vertical-align:top;font-size:12.5px}
+table.spec td:first-child{font-family:var(--mono);font-size:11px;color:var(--ink);white-space:nowrap}
+table.spec td code{font-family:var(--mono);font-size:11px;color:var(--ink)}
+code.inline{font-family:var(--mono);font-size:11px;background:var(--raised);padding:1px 4px;border-radius:4px;color:var(--ink)}
+.divider{border-top:1px solid var(--line);margin:14px 0}
+.pill{font-family:var(--mono);font-size:10px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.pill.ok{color:var(--ok);background:var(--ok-bg)}
+.pill.warn{color:var(--beta-ink);background:var(--beta-bg)}
+.pill.neutral{color:var(--dim);background:var(--raised)}
+.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;vertical-align:-1px;margin-right:4px}
+.footer{flex-shrink:0;margin-top:auto;border-top:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12px;color:var(--dim);background:var(--bg)}
+.footer a{color:var(--dim);text-decoration:none;cursor:pointer}
+.footer a:hover{color:var(--accent-ink);text-decoration:underline}
+.footer .sep{color:var(--line)}
+.footer .copy{margin-left:auto;color:var(--faint);white-space:nowrap}
+/* hero flow */
+.hero-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 14px}
+.hero-flow .step{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 8px;font-size:11px;color:var(--dim);cursor:pointer}
+.hero-flow .step:hover{border-color:var(--line-strong)}
+.hero-flow .step .num{width:18px;height:18px;border-radius:50%;background:var(--raised);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--dim);flex-shrink:0}
+.hero-flow .arr{color:var(--faint);font-size:11px}
+/* lane */
+.lane{margin:18px 0 8px}
+.lane-head{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.lane-head h3{font-size:13px;font-weight:600;margin:0}
+.lane-head .count{font-family:var(--mono);font-size:10px;color:var(--faint);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1px 6px}
+.lane .desc{font-size:12.5px;color:var(--dim);margin:0 0 8px}
+.table-wrap{overflow-x:auto}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#content" onclick="event.preventDefault();document.getElementById('content').focus()">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html" title="Back to Anchor home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6V12C4 17 7.5 21 12 22C16.5 21 20 17 20 12V6L12 2Z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16.5" stroke-linecap="round"/></svg>
+    <b>Anchor</b>
+    <span class="brand-sub">Roadmap</span>
+  </a>
+  <div class="spacer"></div>
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Docs</a>
+    <a href="design-system.html">Design System</a>
+    <a class="active" href="roadmap.html">Roadmap</a>
+  </nav>
+  <button class="icon-btn theme-btn" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle theme">
+    <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="themeIconSun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+</header>
+<div class="layout">
+  <aside class="sidebar thin-scroll" id="sidebar">
+    <a class="side-home" href="index.html" style="display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;margin-bottom:4px;color:var(--ink);text-decoration:none"><span>Home</span></a>
+    <div class="nav-group"><div class="nav-sum top" style="cursor:default"><span class="trunc">Swimlanes</span></div><div class="nav-children" id="laneNav"></div></div>
+    <div class="nav-group"><div class="nav-sum top" style="cursor:default"><span class="trunc">Governance</span></div><div class="nav-children" id="govNav"></div></div>
+    <div class="nav-group"><div class="nav-sum top" style="cursor:default"><span class="trunc">Platform</span></div><div class="nav-children" id="platNav"></div></div>
+    <div class="nav-group"><div class="nav-sum top" style="cursor:default"><span class="trunc">Modules</span></div><div class="nav-children" id="modNav"></div></div>
+  </aside>
+  <main class="main-scroll thin-scroll" id="mainScroll">
+    <div class="content" id="content" tabindex="-1"></div>
+    <footer class="footer">
+      <a>Privacy Policy</a><span class="sep">|</span><a>Terms of Use</a><span class="sep">|</span><a>Security</a>
+      <span class="copy">© 2026 Fortunesoft IT Innovations</span>
+    </footer>
+  </main>
+  <aside class="outline thin-scroll" id="outlineWrap"><h4>On this page</h4><div id="outlineLinks"></div></aside>
+</div>
+<script>
+// ---- JSON source (edit this array to update the roadmap) ----
+const roadmap = [
+  { rank: 1, product: "Security Pipelines", lane: "Governance", category: "Governance", what: "SAST/DAST, SBOM, dependency scanning baked into shared CI/CD", builtOn: "Snyk / Trivy + Dependabot + shared CI/CD templates", why: "Near-zero incremental cost once baked into templates; highest risk reduction per effort; protects client trust", dependsOn: null, status: "Planned" },
+  { rank: 2, product: "ADR Process", lane: "Governance", category: "Governance", what: "Decision traceability via repo convention and ADR templates", builtOn: "Repo convention + ADR templates (process, no tooling)", why: "Pure process, no tooling cost; prevents knowledge loss immediately; should start today", dependsOn: null, status: "Planned" },
+  { rank: 3, product: "Anchor Auth", lane: "Platform", category: "Platform", what: "Login, MFA, RBAC, audit, agent identity (IdP)", builtOn: "Keycloak + Cerbos (your existing spec)", why: "Already underway; every RBAC and audit item below depends on this foundation", dependsOn: null, status: "Building" },
+  { rank: 4, product: "Anchor Portal", lane: "Platform", category: "Platform", what: "Internal Developer Platform — service catalog, golden-path scaffolding, front door", builtOn: "Backstage, themed, authenticated via Anchor Auth", why: "Becomes the catalog that hosts Anchor docs, design system, and SOPs; sequenced right after Anchor stabilizes", dependsOn: "Anchor Auth", status: "Planned" },
+  { rank: 5, product: "Anchor Design", lane: "Platform", category: "Platform", what: "Component library, design tokens, brand consistency", builtOn: "Storybook + Style Dictionary + internal npm, cataloged as System in Portal", why: "Highest visible payoff per client project (speed + consistency); best built once IDP exists to host and version it", dependsOn: "Anchor Auth", status: "Building" },
+  { rank: 6, product: "Anchor Docs", lane: "Platform", category: "Platform", what: "SOPs, API references, runbooks — versioned, docs-as-code (includes SOP/Knowledge Platform)", builtOn: "Backstage TechDocs, sourced from repos (formalizes org-wide docs discipline)", why: "Formalizes docs discipline already designed for Anchor, extended org-wide; natural extension of IDP work", dependsOn: "Anchor Portal", status: "Planned" },
+  { rank: 7, product: "Anchor Insights", lane: "Platform", category: "Governance", what: "Metrics, tracing, SLOs, cost visibility per service (Observability Standard)", builtOn: "Grafana / Prometheus / OTel, surfaced as Backstage plugin", why: "Needed once multiple platforms exist to monitor consistently; low value in isolation", dependsOn: "Anchor Portal", status: "Planned" },
+  { rank: 8, product: "Feature Flags", lane: "Modules", category: "Module", what: "Rollouts, experiments, controlled releases", builtOn: "Unleash / Flagsmith", why: "Useful but not urgent; cheap to add once 2-3 projects request controlled rollouts", dependsOn: "Anchor Portal", status: "Planned" },
+  { rank: 9, product: "Notifications", lane: "Modules", category: "Module", what: "Email / SMS / push via one internal API", builtOn: "SES / Twilio / FCM (wrapped API)", why: "Common need across projects; low cost to build reactively once first real project needs it", dependsOn: "Anchor Auth", status: "Planned" },
+  { rank: 10, product: "File / Document Storage", lane: "Modules", category: "Module", what: "Uploads and access-controlled document storage", builtOn: "S3-compatible + Anchor RBAC", why: "Reactive build logic; ties naturally into Anchor RBAC once it exists", dependsOn: "Anchor Auth", status: "Planned" },
+  { rank: 11, product: "Search", lane: "Modules", category: "Module", what: "Indexing patterns for product search", builtOn: "OpenSearch / Algolia", why: "Project-specific need; low universal urgency", dependsOn: "Anchor Portal", status: "Planned" },
+  { rank: 12, product: "CMS", lane: "Modules", category: "Module", what: "Content workflows and publishing", builtOn: "Payload / Strapi, pre-wired to Anchor", why: "Heavier build effort; only worth standardizing once multiple projects need one", dependsOn: "Anchor Auth", status: "Planned" },
+  { rank: 13, product: "Payments / Billing", lane: "Modules", category: "Module", what: "Invoicing, webhooks, billing flows", builtOn: "Stripe (wrapped)", why: "Highest complexity, narrowest applicability; relevant to specific verticals — per-project until pattern repeats", dependsOn: "Anchor Auth", status: "Planned" },
+  { rank: 14, product: "Anchor Agents", lane: "Platform", category: "Platform", what: "Scoped AI-agent identity and delegation (Phase 5)", builtOn: "Extension of Anchor Auth, exposed through Portal", why: "Agent identity builds on human identity; sequenced last", dependsOn: "Anchor Auth", status: "Planned" },
+];
+// ---- theme (shared key) ----
+function syncThemeIcon(t){
+  var m=document.getElementById('themeIconMoon'),s=document.getElementById('themeIconSun');
+  if(!m||!s) return;
+  var dark=t==='dark';
+  m.classList.toggle('hidden',dark);
+  s.classList.toggle('hidden',!dark);
+}
+(function initTheme(){
+  var t=null;
+  try{ t=localStorage.getItem('anchor-theme'); }catch(e){}
+  if(!t) t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  syncThemeIcon(t);
+})();
+function toggleTheme(){
+  var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',c);
+  try{localStorage.setItem('anchor-theme',c);}catch(e){}
+  syncThemeIcon(c);
+}
+const lanes = ["Governance","Platform","Modules"];
+function statusPill(s){
+  if(s==="Building") return '<span class="pill warn">Building</span>';
+  if(s==="Live") return '<span class="pill ok">Live</span>';
+  return '<span class="pill neutral">Planned</span>';
+}
+function laneColor(l){
+  if(l==="Governance") return "var(--beta-bg)";
+  if(l==="Platform") return "var(--accent-soft)";
+  return "var(--surface)";
+}
+function render(){
+  var content=document.getElementById('content');
+  var heroSteps=roadmap.slice().sort(function(a,b){return a.rank-b.rank}).map(function(r){
+    return '<div class="step" onclick="scrollToLane(\''+r.lane+'\')"><span class="num">'+r.rank+'</span><span class="trunc" style="max-width:120px">'+r.product+'</span></div>';
+  }).join('<span class="arr">→</span>');
+  var howTo='<section class="sec" id="sec-howto"><h2 class="sec-title">How to read this</h2><ul class="bul"><li>Rows are the single source of truth — <b>Anchor Docs</b> row folds in your SOP/Knowledge Platform.</li><li><b>Anchor Auth</b> and <b>Anchor Design</b> are <b>Building</b>; everything else is <b>Planned</b> per your call — flip the <code class="inline">status</code> field to <code class="inline">Live</code> when shipped.</li><li>Click a flow pill to jump to its lane; click a <b>Depends on</b> pill to highlight its prerequisite.</li></ul></section>';
+  var intro='<div class="crumb"><a href="index.html">Home</a><span class="sep">/</span>Roadmap</div>'
+    +'<h1 class="page-title">Roadmap</h1>'
+    +'<p class="page-desc">Priority-sequenced plan for the Anchor platform — governance first, then platform, then modules. Edit the JSON array at the top of <code class="inline">roadmap.html</code> to reorder or add rows.</p>'
+    +howTo
+    +'<div class="callout">Governance is first because Security Pipelines and ADRs block everything else at near-zero cost. Platform (Auth → Portal → Design/Docs) must stand up before modules; modules are on-demand.</div>'
+    +'<section class="sec" id="sec-flow"><h2 class="sec-title">Priority flow 1 → 14</h2><div class="hero-flow">'+heroSteps+'</div></section>';
+  var lanesHtml=lanes.map(function(lane){
+    var rows=roadmap.filter(function(r){return r.lane===lane}).sort(function(a,b){return a.rank-b.rank});
+    if(!rows.length) return "";
+    var th='<tr><th>#</th><th>Product</th><th>What it is</th><th>Built on</th><th>Status</th><th>Why this priority</th><th>Depends on</th></tr>';
+    var tr=rows.map(function(r){
+      return '<tr id="row-'+r.rank+'"><td>'+r.rank+'</td><td><b>'+r.product+'</b><br><span style="font-family:var(--mono);font-size:10px;color:var(--faint)">'+r.category+'</span></td><td>'+r.what+'</td><td><code class="inline" style="white-space:normal;word-break:break-word">'+r.builtOn+'</code></td><td>'+statusPill(r.status)+'</td><td style="min-width:180px">'+r.why+'</td><td>'+(r.dependsOn?'<span class="pill neutral" style="cursor:pointer" onclick="highlight('+r.rank+')">'+r.dependsOn+'</span>':'<span style="color:var(--faint)">—</span>')+'</td></tr>';
+    }).join('');
+    return '<div class="lane" id="lane-'+lane+'"><div class="lane-head"><h3>'+lane+'</h3><span class="count">'+rows.length+'</span></div><p class="desc">'+(lane==="Governance"?"Security, decisions, and observability — cheapest wins first.":lane==="Platform"?"Identity, portal, docs, design, and insights — the shared foundation.":"Reusable service modules — built on-demand when a project needs them.")+'</p><div class="table-wrap"><table class="spec">'+th+tr+'</table></div></div>';
+  }).join('');
+  content.innerHTML=intro+lanesHtml;
+  // sidebar nav
+  var lnav=document.getElementById('laneNav');
+  if(lnav) lnav.innerHTML='<div class="nav-leaf active" onclick="document.getElementById(\'sec-flow\').scrollIntoView({behavior:\'smooth\'})"><span class="trunc">Priority flow</span></div>';
+  var gov=document.getElementById('govNav');
+  var plat=document.getElementById('platNav');
+  var mod=document.getElementById('modNav');
+  function leafFor(r){ return '<div class="nav-leaf" onclick="document.getElementById(\'row-'+r.rank+'\').scrollIntoView({behavior:\'smooth\',block:\'center\'});highlight('+r.rank+')"><span class="trunc">'+r.rank+'. '+r.product+'</span></div>'; }
+  if(gov) gov.innerHTML=roadmap.filter(function(r){return r.lane==="Governance"}).sort(function(a,b){return a.rank-b.rank}).map(leafFor).join('');
+  if(plat) plat.innerHTML=roadmap.filter(function(r){return r.lane==="Platform"}).sort(function(a,b){return a.rank-b.rank}).map(leafFor).join('');
+  if(mod) mod.innerHTML=roadmap.filter(function(r){return r.lane==="Modules"}).sort(function(a,b){return a.rank-b.rank}).map(leafFor).join('');
+  // outline
+  var outline=document.getElementById('outlineLinks');
+  if(outline){
+    outline.innerHTML='<a onclick="document.getElementById(\'sec-howto\').scrollIntoView({behavior:\'smooth\'})">How to read</a>'+lanes.map(function(l){return '<a onclick="document.getElementById(\'lane-'+l+'\').scrollIntoView({behavior:\'smooth\'})">'+l+'</a>';}).join('');
+  }
+  highlight(3);
+}
+function scrollToLane(lane){
+  var el=document.getElementById('lane-'+lane);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+function highlight(rank){
+  document.querySelectorAll('table.spec tr').forEach(function(tr){ tr.style.background=''; });
+  var tr=document.getElementById('row-'+rank);
+  if(tr) { tr.style.background='var(--accent-soft)'; tr.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
+render();
+</script>
+</body>
+</html>
