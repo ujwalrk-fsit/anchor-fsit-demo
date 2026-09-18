@@ -1388,14 +1388,19 @@ document.addEventListener('click', e=>{
 document.addEventListener('keydown', e=>{
   const fbOpen = !document.getElementById('fbOverlay').classList.contains('hidden');
   if(fbOpen){ if(e.key==='Escape') closeFbOverlay(); return; }
-  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='i'){ e.preventDefault(); focusChat(); return; }
-  if(isChatOpen()){
-    if(e.key==='Escape') closeChat();
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='i'){
+    e.preventDefault();
+    if(isChatOpen()) closeChat(); else { if(isCmdkOpen()) closeCmdk(); focusChat(); }
     return;
   }
   if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){
     e.preventDefault();
+    if(isChatOpen()) closeChat();
     isCmdkOpen() ? closeCmdk() : openCmdk();
+    return;
+  }
+  if(isChatOpen()){
+    if(e.key==='Escape') closeChat();
     return;
   }
   if(!isCmdkOpen()) return;
